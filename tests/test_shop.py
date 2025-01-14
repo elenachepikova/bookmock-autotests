@@ -12,6 +12,6 @@ class TestShopPage:
         homepage = HomePage(driver)
         homepage.open()
         panel = NavigationPanel(driver)
-        panel.click_on(panel.SHOP)
+        panel.click_on_shop_item()
         shop_page = ShopPage(driver)
         shop_page.assert_page_is_displayed()

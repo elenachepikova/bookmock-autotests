@@ -12,7 +12,7 @@ class TestContactPage:
         homepage = HomePage(driver)
         homepage.open()
         panel = NavigationPanel(driver)
-        panel.click_on(panel.CONTACT)
+        panel.click_on_contact_item()
         contact_page = ContactPage(driver)
         contact_page.assert_page_is_displayed()
 

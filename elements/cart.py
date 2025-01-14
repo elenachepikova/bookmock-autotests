@@ -32,3 +32,6 @@ class Cart(Actions):
     @allure.step('Assert Cart sidebar is not displayed')
     def assert_cart_is_not_displayed(self):
         assert not self.assertions.assert_element_is_visible(self.TITLE), "Cart sidebar is still visible!"
+
+    def click_on_close_icon(self):
+        self.click_on(self.CLOSE_ICON)

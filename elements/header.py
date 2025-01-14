@@ -32,3 +32,24 @@ class NavigationPanel(Actions):
         self.assertions.assert_element_is_visible(self.CONTACT)
         self.assertions.assert_element_is_visible(self.SHOP_NOW)
         self.assertions.assert_element_is_visible(self.CART)
+
+    def click_on_home_item(self):
+        self.click_on(self.HOME)
+
+    def click_on_about_item(self):
+        self.click_on(self.ABOUT)
+
+    def click_on_shop_item(self):
+        self.click_on(self.SHOP)
+
+    def click_on_faq_item(self):
+        self.click_on(self.FAQ)
+
+    def click_on_contact_item(self):
+        self.click_on(self.CONTACT)
+
+    def click_on_shop_now_button(self):
+        self.click_on(self.SHOP_NOW)
+
+    def click_on_cart_icon(self):
+        self.click_on(self.CART)
