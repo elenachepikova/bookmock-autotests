@@ -83,18 +83,24 @@ To view the database, you can use any SQLite viewer or run SQL queries directly 
 ## Project Structure (TO UPDATE)
 
 ``` vbnet
-├── tests/                # Directory containing all test cases
-│   ├── test_login.py     # Tests for the login functionality
-│   ├── test_search.py    # Tests for the search feature
-│   └── test_checkout.py  # Tests for the checkout process
-├── pages/                # Page Object Model (POM) classes
-│   ├── base_page.py      # Base page with common methods
-│   ├── login_page.py     # Page object for the login page
-│   └── search_page.py    # Page object for the search page
-├── conftest.py           # pytest configurations and fixtures
-├── requirements.txt      # Python dependencies
-├── README.md             # Project documentation
-└── .gitignore            # Git ignore file
+├── tests/                      # Directory containing all test cases
+│   ├── __init__.py             # Tests for the login functionality
+│   ├── test_about.py           # Tests for the search feature
+│   ├── test_cart.py            # Tests for the search feature
+│   ├── test_contact.py         # Tests for the search feature
+│   ├── test_homepage.py        # Tests for the search feature
+│   └── test_shop.py            # Tests for the search feature
+├── pages/                      # Page Object Model (POM) classes
+│   ├── __init__.py             # Base page with common methods
+│   ├── about_page.py           # Base page with common methods
+│   ├── contact_page.py         # Base page with common methods
+│   ├── form_submitted_page.py  # Page object for the login page
+│   ├── home_page.py            # Page object for the search page
+│   └── shop_page.py            # Base page with common methods
+├── conftest.py                 # pytest configurations and fixtures
+├── requirements.txt            # Python dependencies
+├── README.md                   # Project documentation
+└── .gitignore                  # Git ignore file
 ```
 
 ## Author
