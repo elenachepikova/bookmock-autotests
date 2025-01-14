@@ -1,6 +1,6 @@
 import allure
 
-from core.actions import Actions
+from core import Actions
 
 
 class Assertions(Actions):

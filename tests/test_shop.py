@@ -1,8 +1,7 @@
 import allure
 
-from elements.header import NavigationPanel
-from pages.home_page import HomePage
-from pages.shop_page import ShopPage
+from elements import NavigationPanel
+from pages import HomePage, ShopPage
 
 
 @allure.suite("Tests for 'SHOP' page")

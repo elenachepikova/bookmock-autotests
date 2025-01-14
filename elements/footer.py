@@ -2,8 +2,7 @@ import allure
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 
-from core.actions import Actions
-from core.assertions import Assertions
+from core import Actions, Assertions
 
 
 class Footer(Actions):

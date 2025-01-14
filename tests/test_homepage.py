@@ -1,8 +1,7 @@
 import allure
 
-from elements.footer import Footer
-from elements.header import NavigationPanel
-from pages.home_page import HomePage
+from elements import Footer, NavigationPanel
+from pages import HomePage
 
 
 @allure.suite("Tests for 'HOME' page")

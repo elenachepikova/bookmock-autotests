@@ -1,10 +1,7 @@
 import allure
 
-from elements.header import NavigationPanel
-from pages.about_page import AboutPage
-from pages.contact_page import ContactPage
-from pages.home_page import HomePage
-from pages.shop_page import ShopPage
+from elements import NavigationPanel
+from pages import AboutPage, ContactPage, HomePage, ShopPage
 
 
 @allure.suite("Tests for 'ABOUT' page")

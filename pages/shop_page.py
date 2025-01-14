@@ -2,9 +2,8 @@ import allure
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 
-from core.actions import Actions
-from core.assertions import Assertions
-from data.test_data import DOMAIN, TITLE
+from core import Actions, Assertions
+from data import DOMAIN, TITLE
 
 
 class ShopPage(Actions):

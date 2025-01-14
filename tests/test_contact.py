@@ -1,10 +1,7 @@
 import allure
 
-from elements.footer import Footer
-from elements.header import NavigationPanel
-from pages.contact_page import ContactPage
-from pages.form_submitted_page import FormSubmittedPage
-from pages.home_page import HomePage
+from elements import Footer, NavigationPanel
+from pages import ContactPage, FormSubmittedPage, HomePage
 
 
 @allure.suite("Tests for 'CONTACT' page")

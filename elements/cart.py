@@ -4,8 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-from core.actions import Actions
-from core.assertions import Assertions
+from core import Actions, Assertions
 
 
 class Cart(Actions):
