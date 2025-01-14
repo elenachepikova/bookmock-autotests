@@ -23,10 +23,9 @@ class Assertions(Actions):
         element = self.get_element(selector)
         assert "active" in element.get_attribute("class"), f"Expected element to be active, but it is not."
 
-    @allure.step('Assert page title')
-    def assert_page_title(self, title):
-        assert self.driver.title == title
-
-    @allure.step('Assert page URL')
-    def assert_page_url(self, url):
-        assert self.driver.current_url == url, f"Url should be {url}, but is {self.driver.current_url}"
+    @allure.step('Assert page title and URL')
+    def assert_page_title_and_url(self, title, url):
+        if title is not None:
+            assert self.driver.title == title, f"Title should be {title}, but is {self.driver.title}"
+        if url is not None:
+            assert self.driver.current_url == url, f"Url should be {url}, but is {self.driver.current_url}"

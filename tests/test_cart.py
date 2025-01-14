@@ -7,7 +7,7 @@ from pages import HomePage
 @allure.suite("'Cart' sidebar")
 class TestCart:
 
-    @allure.title("Verify CART sidebar can be opened via 'HOME' page")
+    @allure.title("CART sidebar can be opened via 'HOME' page")
     def test_open_empty_cart(self, driver):
         homepage = HomePage(driver)
         homepage.open()

@@ -17,5 +17,5 @@ class FormSubmittedPage(Actions):
 
     @allure.step('Assert "Form Submitted!" page is opened')
     def assert_page_is_displayed(self):
-        self.assertions.assert_page_title(self.title)
+        self.assertions.assert_page_title_and_url(self.title)
         self.assertions.assert_element_is_visible(self.FORM_SUBMITTED_SECTION)
