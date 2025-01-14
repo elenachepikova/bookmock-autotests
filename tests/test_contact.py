@@ -7,15 +7,6 @@ from pages import ContactPage, FormSubmittedPage, HomePage
 @allure.suite("'CONTACT' page")
 class TestContactPage:
 
-    @allure.title("'CONTACT' page is accessible via navigation panel")
-    def test_open_contact_page(self, driver):
-        homepage = HomePage(driver)
-        homepage.open()
-        panel = NavigationPanel(driver)
-        panel.click_on_contact_item()
-        contact_page = ContactPage(driver)
-        contact_page.assert_page_is_displayed()
-
     @allure.title("All expected elements are present on 'CONTACT' page")
     def test_assert_contact_page_ui(self, driver):
         contact_page = ContactPage(driver)

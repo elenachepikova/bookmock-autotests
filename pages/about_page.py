@@ -14,7 +14,7 @@ class AboutPage(Actions):
     def __init__(self, driver):
         super().__init__(driver)
         self.driver: WebDriver = driver
-        self.page = f'{DOMAIN}about'
+        self.page = f'{DOMAIN}/about'
         self.title = f'ABOUT | {TITLE}'
         self.assertions = Assertions(self.driver)
 

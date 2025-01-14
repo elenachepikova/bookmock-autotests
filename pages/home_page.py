@@ -14,7 +14,7 @@ class HomePage(Actions):
     def __init__(self, driver):
         super().__init__(driver)
         self.driver: WebDriver = driver
-        self.page = DOMAIN
+        self.page = f"{DOMAIN}/"
         self.title = TITLE
         self.assertions = Assertions(self.driver)
 

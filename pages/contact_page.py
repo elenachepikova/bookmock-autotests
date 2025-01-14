@@ -27,7 +27,7 @@ class ContactPage(Actions):
     def __init__(self, driver):
         super().__init__(driver)
         self.driver: WebDriver = driver
-        self.page = f'{DOMAIN}contact'
+        self.page = f'{DOMAIN}/contact'
         self.title = f'CONTACT | {TITLE}'
         self.assertions = Assertions(self.driver)
 

@@ -20,11 +20,15 @@ class Cart(Actions):
         self.assertions = Assertions(self.driver)
         self.message = self.get_element(self.MESSAGE)
 
-    @allure.step('Assert Cart sidebar is opened in empty state')
-    def assert_empty_cart_is_displayed(self):
+    @allure.step('Assert Cart sidebar is opened')
+    def assert_cart_sidebar_is_displayed(self):
         self.wait.until(EC.visibility_of_element_located(self.TITLE))
         self.assertions.assert_element_is_visible(self.TITLE)
         self.assertions.assert_element_is_visible(self.CLOSE_ICON)
+
+    @allure.step('Assert Cart sidebar is opened in empty state')
+    def assert_empty_cart_is_displayed(self):
+        self.assert_cart_sidebar_is_displayed()
         self.assertions.assert_element_is_visible(self.MESSAGE)
         assert self.message.text == 'Your Cart is Empty'
         self.assertions.assert_element_is_visible(self.CONTINUE_SHOPPING_BUTTON)
