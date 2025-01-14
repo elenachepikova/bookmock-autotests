@@ -4,7 +4,7 @@ from elements import Cart, NavigationPanel
 from pages import HomePage
 
 
-@allure.suite("Tests for 'Cart' sidebar")
+@allure.suite("'Cart' sidebar")
 class TestCart:
 
     @allure.title("Verify CART sidebar can be opened via 'HOME' page")

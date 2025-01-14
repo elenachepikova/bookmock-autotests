@@ -4,10 +4,10 @@ from elements import NavigationPanel
 from pages import AboutPage, ContactPage, HomePage, ShopPage
 
 
-@allure.suite("Tests for 'ABOUT' page")
+@allure.suite("'ABOUT' page")
 class TestAboutPage:
 
-    @allure.title("Verify 'ABOUT' page is accessible via navigation panel")
+    @allure.title("'ABOUT' page is accessible via navigation panel")
     def test_open_about_page(self, driver):
         homepage = HomePage(driver)
         homepage.open()
@@ -16,7 +16,7 @@ class TestAboutPage:
         about_page = AboutPage(driver)
         about_page.assert_page_is_displayed()
 
-    @allure.title("Verify user is redirected from 'ABOUT' to 'CONTACT' via 'CONTACT US' button")
+    @allure.title("User is redirected from 'ABOUT' to 'CONTACT' via 'CONTACT US' button")
     def test_click_contact_us_button(self, driver):
         about_page = AboutPage(driver)
         about_page.open()
@@ -24,7 +24,7 @@ class TestAboutPage:
         contact_page = ContactPage(driver)
         contact_page.assert_page_is_displayed()
 
-    @allure.title("Verify user is redirected from 'ABOUT' to 'SHOP' via 'SHOP NOW' button")
+    @allure.title("User is redirected from 'ABOUT' to 'SHOP' via 'SHOP NOW' button")
     def test_click_shop_now_button(self, driver):
         about_page = AboutPage(driver)
         about_page.open()

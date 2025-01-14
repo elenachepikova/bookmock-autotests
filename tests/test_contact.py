@@ -4,10 +4,10 @@ from elements import Footer, NavigationPanel
 from pages import ContactPage, FormSubmittedPage, HomePage
 
 
-@allure.suite("Tests for 'CONTACT' page")
+@allure.suite("'CONTACT' page")
 class TestContactPage:
 
-    @allure.title("Verify 'CONTACT' page is accessible via navigation panel")
+    @allure.title("'CONTACT' page is accessible via navigation panel")
     def test_open_contact_page(self, driver):
         homepage = HomePage(driver)
         homepage.open()
@@ -16,7 +16,7 @@ class TestContactPage:
         contact_page = ContactPage(driver)
         contact_page.assert_page_is_displayed()
 
-    @allure.title("Verify all expected elements are present on 'CONTACT' page")
+    @allure.title("All expected elements are present on 'CONTACT' page")
     def test_assert_contact_page_ui(self, driver):
         contact_page = ContactPage(driver)
         contact_page.open()

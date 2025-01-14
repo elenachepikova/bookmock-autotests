@@ -4,16 +4,16 @@ from elements import Footer, NavigationPanel
 from pages import HomePage
 
 
-@allure.suite("Tests for 'HOME' page")
+@allure.suite("'HOME' page")
 class TestHomePage:
 
-    @allure.title("Verify 'HOME' page is accessible")
+    @allure.title("'HOME' page is accessible")
     def test_open_homepage(self, driver):
         homepage = HomePage(driver)
         homepage.open()
         homepage.assert_page_is_displayed()
 
-    @allure.title("Verify all expected elements are present on 'HOME' page")
+    @allure.title("All expected elements are present on 'HOME' page")
     def test_assert_homepage_ui(self, driver):
         homepage = HomePage(driver)
         homepage.open()
