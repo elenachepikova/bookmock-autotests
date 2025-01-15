@@ -35,3 +35,7 @@ class Assertions(Actions):
             assert self.driver.title == title, f"Title should be {title}, but is {self.driver.title}"
         if url is not None:
             assert self.driver.current_url == url, f"Url should be {url}, but is {self.driver.current_url}"
+
+    def assert_text(self, item, text):
+        assert item.text == text, f'Text for {item} is not found'
+

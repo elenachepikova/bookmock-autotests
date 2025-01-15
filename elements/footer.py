@@ -14,6 +14,9 @@ class Footer(Actions):
     ADDRESS = (By.CSS_SELECTOR, '.d-flex.py-1:first-of-type')
     EMAIL = (By.CSS_SELECTOR, '.d-flex.py-1:last-of-type')
     MESSAGE = (By.CSS_SELECTOR, '.px-2.mb-3')
+    address_text = 'ul. Starowiślna 17/2, 31-038 Kraków'
+    email_text = 'ec.estest01@gmail.com'
+    message_text = 'This site is created for testing purposes and can be used only by the site owner'
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -31,9 +34,8 @@ class Footer(Actions):
         self.assertions.assert_element_is_visible(self.INSTAGRAM_ICON)
         self.assertions.assert_element_is_visible(self.LINKEDIN_ICON)
         self.assertions.assert_element_is_visible(self.ADDRESS)
-        assert self.address.text == 'ul. Starowiślna 17/2, 31-038 Kraków'
         self.assertions.assert_element_is_visible(self.EMAIL)
-        assert self.email.text == 'ec.estest01@gmail.com'
         self.assertions.assert_element_is_visible(self.MESSAGE)
-        assert self.message.text == ('This site is created for testing purposes '
-                                     'and can be used only by the site owner')
+        self.assertions.assert_text(self.address, self.address_text)
+        self.assertions.assert_text(self.email, self.email_text)
+        self.assertions.assert_text(self.message, self.message_text)
