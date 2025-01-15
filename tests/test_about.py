@@ -1,7 +1,6 @@
 import allure
 
-from elements import NavigationPanel
-from pages import AboutPage, ContactPage, HomePage, ShopPage
+from pages import AboutPage, ContactPage, ShopPage
 
 
 @allure.suite("'ABOUT' page")

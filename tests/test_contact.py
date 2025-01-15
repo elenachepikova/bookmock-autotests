@@ -1,7 +1,7 @@
 import allure
 
 from elements import Footer, NavigationPanel
-from pages import ContactPage, FormSubmittedPage, HomePage
+from pages import ContactPage, FormSubmittedPage
 
 
 @allure.suite("'CONTACT' page")

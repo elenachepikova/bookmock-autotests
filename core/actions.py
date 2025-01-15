@@ -1,5 +1,7 @@
 import allure
 from selenium.webdriver.chrome.webdriver import WebDriver
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
 
 
 class Actions:
@@ -8,7 +10,8 @@ class Actions:
 
     @allure.step('Find element by selector')
     def get_element(self, selector):
-        return self.driver.find_element(*selector)
+        element = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(selector))
+        return element
 
     @allure.step('Click_on {selector}')
     def click_on(self, selector, force=False):
