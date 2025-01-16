@@ -1,11 +1,11 @@
 import time
+
 import allure
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 
 from core import Actions, Assertions
 from data import DOMAIN, TITLE
-from data.customer_db_usage import get_customer_from_db
 
 
 class ContactPage(Actions):
@@ -17,19 +17,14 @@ class ContactPage(Actions):
     EMAIL_FIELD = (By.XPATH, '//*[@name="Email"]')
     MESSAGE_FIELD = (By.XPATH, '//*[@name="Message"]')
     SUBMIT_BUTTON = (By.CSS_SELECTOR, 'button[type="submit"].btn.btn-primary')
-    customer_data = get_customer_from_db()
-    first_name = customer_data[0]
-    last_name = customer_data[1]
-    email = customer_data[2]
-    message = customer_data[3]
 
-
-    def __init__(self, driver):
+    def __init__(self, driver, customer_data=None):
         super().__init__(driver)
         self.driver: WebDriver = driver
         self.page = f'{DOMAIN}/contact'
         self.title = f'CONTACT | {TITLE}'
         self.assertions = Assertions(self.driver)
+        self.customer_data = customer_data
 
     @allure.step('Open CONTACT page')
     def open(self):
@@ -48,32 +43,32 @@ class ContactPage(Actions):
 
     @allure.step('Fill in "First Name" field')
     def fill_in_first_name_field(self):
-        self.input_text(self.first_name, self.FIRST_NAME_FIELD)
-        # assert self.get_attribute(self.FIRST_NAME_FIELD) == False, 'FIRST_NAME_FIELD aria-invalid="true"'
+        self.input_text(self.customer_data[0], self.FIRST_NAME_FIELD)
 
     @allure.step('Fill in "Last Name" field')
     def fill_in_last_name_field(self):
-        self.input_text(self.last_name, self.LAST_NAME_FIELD)
-        # assert self.get_attribute(self.LAST_NAME_FIELD) == False, 'LAST_NAME_FIELD aria-invalid="true"'
+        self.input_text(self.customer_data[1], self.LAST_NAME_FIELD)
 
     @allure.step('Fill in "Email" field')
     def fill_in_email_field(self):
-        self.input_text(self.email, self.EMAIL_FIELD)
-        # assert self.get_attribute(self.EMAIL_FIELD) == False, 'EMAIL_FIELD aria-invalid="true"'
+        self.input_text(self.customer_data[2], self.EMAIL_FIELD)
 
     @allure.step('Fill in "Message" field')
     def fill_in_message_field(self):
-        self.input_text(self.message, self.MESSAGE_FIELD)
-        # assert self.get_attribute(self.MESSAGE_FIELD) == False, 'MESSAGE_FIELD aria-invalid="true"'
+        self.input_text(self.customer_data[3], self.MESSAGE_FIELD)
 
+    # DRAFT VERSION, METHOD NEEDS TO BE REWORKED
     @allure.step('Fill in and submit "Contact Us" form')
     def fill_in_contact_us_form(self):
         self.click_on(self.SUBMIT_BUTTON)
         time.sleep(10)
         self.fill_in_first_name_field()
+        time.sleep(10)
         self.fill_in_last_name_field()
+        time.sleep(10)
         self.fill_in_email_field()
+        time.sleep(10)
         self.fill_in_message_field()
         time.sleep(10)
         self.click_on(self.SUBMIT_BUTTON)
-        time.sleep(30)
+        time.sleep(10)
