@@ -38,4 +38,3 @@ class Assertions(Actions):
 
     def assert_text(self, item, text):
         assert item.text == text, f'Text for {item} is not found'
-

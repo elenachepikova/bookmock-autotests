@@ -13,6 +13,11 @@ class Actions:
         element = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(selector))
         return element
 
+    @allure.step('Count the number of elements found by selector')
+    def count_elements(self, selector):
+        elements = WebDriverWait(self.driver, 10).until(EC.presence_of_all_elements_located(selector))
+        return len(elements)
+
     @allure.step('Click_on {selector}')
     def click_on(self, selector, force=False):
         element = self.get_element(selector)
