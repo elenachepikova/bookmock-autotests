@@ -36,8 +36,9 @@ class Assertions(Actions):
         if url is not None:
             assert self.driver.current_url == url, f"Url should be {url}, but is {self.driver.current_url}"
 
-    def assert_text(self, item, text):
-        assert item.text == text, f'Text for {item} is not found'
+    def assert_text(self, selector, text):
+        element = self.get_element(selector)
+        assert element.text == text, f'Text for {element} is not found'
 
     def assert_value(self, selector, expected_value):
         element = self.get_element(selector)
