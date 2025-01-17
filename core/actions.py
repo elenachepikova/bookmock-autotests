@@ -1,5 +1,6 @@
 import allure
 from selenium.webdriver.chrome.webdriver import WebDriver
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
@@ -12,11 +13,6 @@ class Actions:
     def get_element(self, selector):
         element = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(selector))
         return element
-
-    @allure.step('Count the number of elements found by selector')
-    def count_elements(self, selector):
-        elements = WebDriverWait(self.driver, 10).until(EC.presence_of_all_elements_located(selector))
-        return len(elements)
 
     @allure.step('Click_on {selector}')
     def click_on(self, selector, force=False):
@@ -36,3 +32,15 @@ class Actions:
         field = self.get_element(selector)
         field.clear()
         assert field.get_attribute("value") == ''
+
+    @allure.step('Get href value for child attribute based on parent selector')
+    def get_link_attribute(self, selector):
+        parent_element = self.get_element(selector)
+        element = parent_element.find_element(By.XPATH, ".//a")
+        link = element.get_attribute("href")
+        return link
+
+    @allure.step('Count the number of elements found by selector')
+    def count_elements(self, selector):
+        elements = WebDriverWait(self.driver, 10).until(EC.presence_of_all_elements_located(selector))
+        return len(elements)

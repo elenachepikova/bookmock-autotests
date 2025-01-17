@@ -38,3 +38,9 @@ class Assertions(Actions):
 
     def assert_text(self, item, text):
         assert item.text == text, f'Text for {item} is not found'
+
+    def assert_value(self, selector, expected_value):
+        element = self.get_element(selector)
+        actual_value = element.get_attribute("value")
+        assert actual_value == expected_value, (f'Expected value for {selector}: '
+                                                f'{expected_value}, actual - {actual_value}')

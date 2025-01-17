@@ -11,7 +11,11 @@ class HomePage(Actions):
     FEATURED_SECTION = (By.ID, 'bb-section-512921E5-B3EE-81BE-E747-F1A82516138D')
     RECENT_REVIEWS = (By.ID, 'bb-section-512921E6-02B3-DB71-72CB-05545E668750')
     SEARCH_AND_FILTER_BUTTON = (By.CSS_SELECTOR, '.d-block')
+    PRODUCT = (By.ID, 'store-products-12463756')
     PRODUCTS = (By.CSS_SELECTOR, '.col-6.col-sm-6')
+    harry_potter = f"{DOMAIN}/shop/product/untitled-product-2"
+    twilight = f"{DOMAIN}/shop/product/untitled-product-1"
+    nothing_found = 'No products matched your search criteria. Try widening your search.'
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -39,6 +43,15 @@ class HomePage(Actions):
         self.click_on(self.SEARCH_AND_FILTER_BUTTON)
 
     def assert_products_count(self, value):
-
         assert self.count_elements(self.PRODUCTS) == value, (f"Expected products count = {value}, "
                                                              f"actual = {self.count_elements(self.PRODUCTS)}")
+
+    def assert_book_is_harry_potter(self):
+        assert self.get_link_attribute(self.PRODUCT) == self.harry_potter
+
+    def assert_book_is_twilight(self):
+        assert self.get_link_attribute(self.PRODUCTS) == self.twilight
+
+    def assert_no_results_found_message(self):
+        message = self.get_element(self.PRODUCT)
+        self.assertions.assert_text(message, self.nothing_found)
