@@ -2,6 +2,7 @@ import allure
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.wait import WebDriverWait
 
 
@@ -44,3 +45,18 @@ class Actions:
     def count_elements(self, selector):
         elements = WebDriverWait(self.driver, 10).until(EC.presence_of_all_elements_located(selector))
         return len(elements)
+
+    @allure.step('Find the first of all elements found by selector')
+    def return_first_element(self, selector):
+        elements = WebDriverWait(self.driver, 10).until(EC.presence_of_all_elements_located(selector))
+        return elements[0]
+
+    @allure.step('Select item from drop-down')
+    def select_dropdown_option(self, selector, value):
+        select = Select(self.get_element(selector))
+        return select.select_by_value(value)
+
+    @allure.step('Get book title')
+    def get_book_title(self, book):
+        title = book.find_element(By.XPATH, ".//h5").text
+        return title
