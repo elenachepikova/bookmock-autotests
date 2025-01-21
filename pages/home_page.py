@@ -14,8 +14,6 @@ class HomePage(Actions):
     PRODUCT = (By.ID, 'store-products-12463756')
     PRODUCTS = (By.CSS_SELECTOR, '.col-6.col-sm-6')
     SHOP_LINK = (By.CSS_SELECTOR, '.content-breadcrumbs a')
-    harry_potter = f"{DOMAIN}/shop/product/untitled-product-2"
-    twilight = f"{DOMAIN}/shop/product/untitled-product-1"
     nothing_found = 'No products matched your search criteria. Try widening your search.'
 
     def __init__(self, driver):

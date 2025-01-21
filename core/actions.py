@@ -39,13 +39,6 @@ class Actions:
         field.clear()
         assert field.get_attribute("value") == ''
 
-    @allure.step('Get href value for child attribute based on parent selector')
-    def get_link_attribute(self, selector):
-        parent_element = self.wait_for_element(selector)
-        element = parent_element.find_element(By.XPATH, ".//a")
-        link = element.get_attribute("href")
-        return link
-
     @allure.step('Count the number of elements found by selector')
     def count_elements(self, selector):
         elements = self.wait_for_elements(selector)
