@@ -22,9 +22,6 @@ class Footer(Actions):
         super().__init__(driver)
         self.driver: WebDriver = driver
         self.assertions = Assertions(self.driver)
-        self.address = self.get_element(self.ADDRESS)
-        self.email = self.get_element(self.EMAIL)
-        self.message = self.get_element(self.MESSAGE)
 
     @allure.step('Assert that all footer section elements are present')
     def assert_footer_is_displayed(self):
@@ -36,6 +33,6 @@ class Footer(Actions):
         self.assertions.assert_element_is_visible(self.ADDRESS)
         self.assertions.assert_element_is_visible(self.EMAIL)
         self.assertions.assert_element_is_visible(self.MESSAGE)
-        self.assertions.assert_text(self.address, self.address_text)
-        self.assertions.assert_text(self.email, self.email_text)
-        self.assertions.assert_text(self.message, self.message_text)
+        self.assertions.assert_text(self.ADDRESS, self.address_text)
+        self.assertions.assert_text(self.EMAIL, self.email_text)
+        self.assertions.assert_text(self.MESSAGE, self.message_text)

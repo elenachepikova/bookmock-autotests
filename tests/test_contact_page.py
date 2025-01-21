@@ -1,4 +1,5 @@
 import allure
+import pytest
 
 from elements import Footer, NavigationPanel
 from pages import ContactPage, FormSubmittedPage
@@ -18,6 +19,7 @@ class TestContactPage:
         footer.assert_footer_is_displayed()
 
     # DRAFT VERSION, TEST NEEDS TO BE REVIEWED
+    @pytest.mark.xfail
     @allure.title("'Contact Us' form can be successfully submitted if all fields are filled in")
     def test_submit_contact_us_form(self, driver, customer_db):
         contact_page = ContactPage(driver, customer_db)

@@ -16,7 +16,7 @@ class Cart(Actions):
         super().__init__(driver)
         self.driver: WebDriver = driver
         self.assertions = Assertions(self.driver)
-        self.message = self.get_element(self.MESSAGE)
+        self.message = self.wait_for_element(self.MESSAGE)
 
     @allure.step('Assert Cart sidebar is opened')
     def assert_cart_sidebar_is_displayed(self):
@@ -35,5 +35,6 @@ class Cart(Actions):
     def assert_cart_is_not_displayed(self):
         self.assertions.assert_element_is_not_visible(self.CART), "Cart sidebar is still visible!"
 
+    @allure.step('Close Cart sidebar by click on close icon')
     def click_on_close_icon(self):
         self.click_on(self.CLOSE_ICON)
