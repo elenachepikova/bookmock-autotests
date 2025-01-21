@@ -36,7 +36,7 @@ def driver():
     driver.quit()
 
 
-@pytest.fixture(autouse=True, scope="session")
+@pytest.fixture(autouse=True, scope="function")
 def customer_db():
     customer_db = CustomerDB()
     customer_db.create_database()

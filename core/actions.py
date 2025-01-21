@@ -20,7 +20,7 @@ class Actions:
         elements = WebDriverWait(self.driver, 10).until(EC.presence_of_all_elements_located(selector))
         return elements
 
-    @allure.step('Click_on {selector}')
+    @allure.step('Click_on {selector[1]}')
     def click_on(self, selector, force=False):
         element = self.wait_for_element(selector)
         if force:
