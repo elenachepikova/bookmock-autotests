@@ -16,7 +16,7 @@ class Cart(Actions):
         super().__init__(driver)
         self.driver: WebDriver = driver
         self.assertions = Assertions(self.driver)
-        self.message = self.get_element(self.MESSAGE)
+        self.message = self.wait_for_element(self.MESSAGE)
 
     @allure.step('Assert Cart sidebar is opened')
     def assert_cart_sidebar_is_displayed(self):

@@ -48,7 +48,7 @@ class HomePage(Actions):
                                                              f"actual = {self.count_elements(self.PRODUCTS)}")
 
     def assert_book_title(self, book_title):
-        book = self.get_element(self.PRODUCT)
+        book = self.wait_for_element(self.PRODUCT)
         assert self.get_book_title(book) == book_title
 
     def assert_first_book_title(self, book_title):
