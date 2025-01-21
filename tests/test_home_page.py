@@ -33,7 +33,6 @@ class TestHomePage:
         shop_page = ShopPage(driver)
         shop_page.assert_page_is_displayed()
 
-    # UNSTABLE!!!
     @pytest.mark.parametrize("dropdown_option, title",
                              [(lambda dropdown: dropdown.sort_by_recently_added(), TWILIGHT_TITLE),
                               (lambda dropdown: dropdown.sort_by_price_low_high(), HARRY_POTTER_TITLE),
@@ -46,5 +45,4 @@ class TestHomePage:
         homepage.open()
         dropdown = SortByDropdown(driver)
         dropdown_option(dropdown)
-        # time.sleep(7)
         homepage.assert_first_book_title(title)

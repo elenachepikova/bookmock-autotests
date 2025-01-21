@@ -60,3 +60,7 @@ class Actions:
     def get_book_title(self, book):
         title = book.find_element(By.XPATH, ".//h5").text
         return title
+
+    @allure.step('Wait until item is NOT displayed')
+    def wait_for_item_invisibility(self, selector):
+        WebDriverWait(self.driver, 10).until(EC.invisibility_of_element_located(selector))
