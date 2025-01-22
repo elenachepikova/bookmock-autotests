@@ -57,7 +57,7 @@ class TestSearchAndFilterSidebar:
         search_sidebar.check_popular_checkbox()
         search_sidebar.click_on_apply_button()
         homepage.assert_products_count(1)
-        homepage.assert_first_book_title(HARRY_POTTER_TITLE)
+        homepage.assert_book_title(HARRY_POTTER_TITLE)
 
     @allure.title("Filter Featured products by Fiction collection")
     def test_filter_by_fiction_collection(self, driver):

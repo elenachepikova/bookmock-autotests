@@ -15,10 +15,6 @@ class Assertions(Actions):
         element = self.wait_for_element(selector)
         assert element.is_displayed(), f"Element {selector} is not visible"
 
-    def assert_element_is_not_visible(self, selector):
-        invisibility = WebDriverWait(self.driver, 10).until(EC.invisibility_of_element_located(selector))
-        assert invisibility == True, f"Element {selector} is visible"
-
     @allure.step('Assert element {selector} is selected')
     def assert_element_is_selected(self, selector):
         element = self.wait_for_element(selector)

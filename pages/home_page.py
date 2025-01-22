@@ -3,7 +3,7 @@ from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 
 from core import Actions, Assertions
-from data import DOMAIN, TITLE
+from data import DOMAIN, TITLE, NOT_FOUND_MESSAGE
 
 
 class HomePage(Actions):
@@ -22,7 +22,6 @@ class HomePage(Actions):
     PRODUCT = (By.ID, 'store-products-12463756')
     PRODUCTS = (By.CSS_SELECTOR, '.col-6.col-sm-6')
     SHOP_LINK = (By.CSS_SELECTOR, '.content-breadcrumbs a')
-    nothing_found = 'No products matched your search criteria. Try widening your search.'
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -74,4 +73,4 @@ class HomePage(Actions):
         assert self.get_book_title(first_book) == book_title
 
     def assert_no_results_found_message(self):
-        self.assertions.assert_text(self.PRODUCT, self.nothing_found)
+        self.assertions.assert_text(self.PRODUCT, NOT_FOUND_MESSAGE)

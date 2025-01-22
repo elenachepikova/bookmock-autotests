@@ -61,7 +61,7 @@ class SearchAndFilter(Actions):
 
     @allure.step('Assert "Search and Filter" sidebar is not displayed')
     def assert_search_and_filter_sidebar_is_not_displayed(self):
-        self.assertions.assert_element_is_not_visible(self.SEARCH_AND_FILTER), ("'Search and Filter' "
+        self.wait_for_element_invisibility(self.SEARCH_AND_FILTER), ("'Search and Filter' "
                                                                                 "sidebar is still visible!")
 
     @allure.step('Enter {value} into "Search" field on "Search and Filter" sidebar')

@@ -7,6 +7,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 
 class Actions:
+    SPINNER = (By.CSS_SELECTOR, ".loading-overlay")
+
     def __init__(self, driver):
         self.driver: WebDriver = driver
 
@@ -19,6 +21,11 @@ class Actions:
     def wait_for_elements(self, selector):
         elements = WebDriverWait(self.driver, 10).until(EC.presence_of_all_elements_located(selector))
         return elements
+
+    @allure.step('Wait for elements not to be displayed')
+    def wait_for_element_invisibility(self, selector):
+        invisibility = WebDriverWait(self.driver, 10).until(EC.invisibility_of_element_located(selector))
+        assert invisibility == True, f"Element {selector} is visible"
 
     @allure.step('Click_on {selector[1]}')
     def click_on(self, selector, force=False):
@@ -58,3 +65,13 @@ class Actions:
     def get_book_title(self, book):
         title = book.find_element(By.XPATH, ".//h5").text
         return title
+
+    @allure.step('Get element label for {selector[1]}')
+    def get_label(self, selector):
+        element = self.wait_for_element(selector)
+        label = element.get_attribute("innerText").split("\n")
+        return label[0]
+
+    @allure.step('Wait for page to load')
+    def wait_for_page_to_load(self):
+        self.wait_for_element_invisibility(self.SPINNER)
