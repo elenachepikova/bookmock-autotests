@@ -2,11 +2,11 @@ import allure
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 
-from core import Actions, Assertions
+from core import CommonActions
 from data import DOMAIN, TITLE, NOT_FOUND_MESSAGE
 
 
-class ShopPage(Actions):
+class ShopPage(CommonActions):
     ALL_PRODUCTS_TITLE = (By.CSS_SELECTOR, 'h2.bb-font-h2')
     SEARCH_SECTION = (By.XPATH, '(//*[@class="form-group"])[1]')
     SEARCH_FILED = (By.XPATH, '//input[@name="search"]')
@@ -32,7 +32,6 @@ class ShopPage(Actions):
         self.driver: WebDriver = driver
         self.page = f'{DOMAIN}/shop'
         self.title = f'SHOP | {TITLE}'
-        self.assertions = Assertions(self.driver)
 
     @allure.step('Open SHOP page')
     def open(self):
@@ -40,17 +39,17 @@ class ShopPage(Actions):
 
     @allure.step('Assert "SHOP" page is opened')
     def assert_page_is_displayed(self):
-        self.assertions.assert_page_title_and_url(self.title, self.page)
-        self.assertions.assert_element_is_visible(self.ALL_PRODUCTS_TITLE)
-        self.assertions.assert_text(self.ALL_PRODUCTS_TITLE, "All Products")
+        self.assert_page_title_and_url(self.title, self.page)
+        self.assert_element_is_visible(self.ALL_PRODUCTS_TITLE)
+        self.assert_text(self.ALL_PRODUCTS_TITLE, "All Products")
 
     @allure.step('Assert All Products section UI')
     def assert_all_products_section_ui(self):
-        self.assertions.assert_element_is_visible(self.SEARCH_SECTION), 'SEARCH_SECTION not displayed'
-        self.assertions.assert_element_is_visible(self.BROWSE_BY_SECTION), 'BROWSE_BY_SECTION not displayed'
-        self.assertions.assert_element_is_visible(self.COLLECTIONS_SECTION), 'COLLECTIONS_SECTION not displayed'
-        self.assertions.assert_element_is_visible(self.PRICE_SECTION), 'PRICE_SECTION not displayed'
-        self.assertions.assert_element_is_visible(self.SORT_BY_DROPDOWN), 'SORT_BY_DROPDOWN not displayed'
+        self.assert_element_is_visible(self.SEARCH_SECTION), 'SEARCH_SECTION not displayed'
+        self.assert_element_is_visible(self.BROWSE_BY_SECTION), 'BROWSE_BY_SECTION not displayed'
+        self.assert_element_is_visible(self.COLLECTIONS_SECTION), 'COLLECTIONS_SECTION not displayed'
+        self.assert_element_is_visible(self.PRICE_SECTION), 'PRICE_SECTION not displayed'
+        self.assert_element_is_visible(self.SORT_BY_DROPDOWN), 'SORT_BY_DROPDOWN not displayed'
         assert self.get_label(self.SEARCH_SECTION) == "Search"
         assert self.get_label(self.BROWSE_BY_SECTION) == "Browse By"
         assert self.get_label(self.COLLECTIONS_SECTION) == "Collections:"
@@ -61,15 +60,15 @@ class ShopPage(Actions):
     def assert_products_count(self, value):
         assert self.count_elements(self.PRODUCTS) == value, (f"Expected products count = {value}, "
                                                              f"actual = {self.count_elements(self.PRODUCTS)}")
-        self.assertions.assert_text(self.SEARCH_RESULTS, f"Showing 1-{value} of {value} results")
+        self.assert_text(self.SEARCH_RESULTS, f"Showing 1-{value} of {value} results")
 
     @allure.step('Assert min Price value on "Search and Filter" sidebar')
     def assert_price_min_field_value(self, value):
-        self.assertions.assert_value(self.PRICE_MIN_FIELD, value)
+        self.assert_value(self.PRICE_MIN_FIELD, value)
 
     @allure.step('Assert max Price value on "Search and Filter" sidebar')
     def assert_price_max_field_value(self, value):
-        self.assertions.assert_value(self.PRICE_MAX_FIELD, value)
+        self.assert_value(self.PRICE_MAX_FIELD, value)
 
     def click_on_search_button(self):
         self.click_on(self.SEARCH_BUTTON)
@@ -77,15 +76,10 @@ class ShopPage(Actions):
 
     @allure.step('Enter {value} into "Search" field on "SHOP" page')
     def fill_in_search_field(self, value):
-        self.input_text(value, self.SEARCH_FILED)
-
-    def assert_book_title(self, book_title):
-        book = self.wait_for_element(self.PRODUCT)
-        assert self.get_book_title(book) == book_title
+        self.insert_text(value, self.SEARCH_FILED)
 
     def assert_first_book_title(self, book_title):
-        first_book = self.return_first_element(self.PRODUCTS)
-        assert self.get_book_title(first_book) == book_title
+        assert self.get_first_book_title(self.PRODUCTS) == book_title
 
     @allure.step('Clear Filter on "SHOP" page')
     def clear_search_filter(self):
@@ -125,7 +119,7 @@ class ShopPage(Actions):
     @allure.step('Enter {value} into min Price field on "Search and Filter" sidebar')
     def fill_in_price_min_field(self, value):
         self.clear_price_min_field()
-        self.input_text(value, self.PRICE_MIN_FIELD)
+        self.insert_text(value, self.PRICE_MIN_FIELD)
         self.wait_for_page_to_load()
 
     @allure.step('Clear min Price field on "Search and Filter" sidebar')
@@ -135,7 +129,7 @@ class ShopPage(Actions):
     @allure.step('Enter {value} into max Price field on "Search and Filter" sidebar')
     def fill_in_price_max_field(self, value):
         self.clear_price_max_field()
-        self.input_text(value, self.PRICE_MAX_FIELD)
+        self.insert_text(value, self.PRICE_MAX_FIELD)
         self.wait_for_page_to_load()
 
     @allure.step('Clear max Price field on "Search and Filter" sidebar')
@@ -143,4 +137,4 @@ class ShopPage(Actions):
         self.clear_text(self.PRICE_MAX_FIELD)
 
     def assert_no_results_found_message(self):
-        self.assertions.assert_text(self.PRODUCT, NOT_FOUND_MESSAGE)
+        self.assert_text(self.PRODUCT, NOT_FOUND_MESSAGE)

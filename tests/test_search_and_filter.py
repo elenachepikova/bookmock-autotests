@@ -31,7 +31,7 @@ class TestSearchAndFilterSidebar:
         search_sidebar.fill_in_search_field(value)
         search_sidebar.click_on_apply_button()
         homepage.assert_products_count(1)
-        homepage.assert_book_title(title)
+        homepage.assert_first_book_title(title)
 
     @allure.title("Clear search by product name on 'Search and Filter' sidebar")
     def test_clear_search_filter(self, driver):
@@ -42,7 +42,7 @@ class TestSearchAndFilterSidebar:
         search_sidebar.fill_in_search_field("twi")
         search_sidebar.click_on_apply_button()
         homepage.assert_products_count(1)
-        homepage.assert_book_title(TWILIGHT_TITLE)
+        homepage.assert_first_book_title(TWILIGHT_TITLE)
         homepage.click_on_search_and_filter_button()
         search_sidebar.click_on_clear_filter_button()
         homepage.assert_products_count(2)
@@ -57,7 +57,7 @@ class TestSearchAndFilterSidebar:
         search_sidebar.check_popular_checkbox()
         search_sidebar.click_on_apply_button()
         homepage.assert_products_count(1)
-        homepage.assert_book_title(HARRY_POTTER_TITLE)
+        homepage.assert_first_book_title(HARRY_POTTER_TITLE)
 
     @allure.title("Filter Featured products by Fiction collection")
     def test_filter_by_fiction_collection(self, driver):
@@ -109,7 +109,7 @@ class TestSearchAndFilterSidebar:
         search_sidebar.fill_in_price_max_field(price_max)
         search_sidebar.click_on_apply_button()
         homepage.assert_products_count(1)
-        homepage.assert_book_title(title)
+        homepage.assert_first_book_title(title)
 
     @allure.title("No products found message is displayed if search is unsuccessful")
     def test_no_matches_found(self, driver):

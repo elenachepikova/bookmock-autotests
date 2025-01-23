@@ -31,7 +31,7 @@ class TestShopPage:
         shop_page.fill_in_search_field(value)
         shop_page.click_on_search_button()
         shop_page.assert_products_count(1)
-        shop_page.assert_book_title(title)
+        shop_page.assert_first_book_title(title)
 
     @allure.title("Clear search by product name on 'SHOP' page")
     def test_clear_search_filter(self, driver):
@@ -40,7 +40,7 @@ class TestShopPage:
         shop_page.fill_in_search_field("gre")
         shop_page.click_on_search_button()
         shop_page.assert_products_count(1)
-        shop_page.assert_book_title(HAPPINESS_TITLE)
+        shop_page.assert_first_book_title(HAPPINESS_TITLE)
         shop_page.clear_search_filter()
         shop_page.assert_products_count(3)
 
@@ -82,7 +82,7 @@ class TestShopPage:
         shop_page.fill_in_price_min_field(price_min)
         shop_page.fill_in_price_max_field(price_max)
         shop_page.assert_products_count(1)
-        shop_page.assert_book_title(title)
+        shop_page.assert_first_book_title(title)
 
     @allure.title("No products found message is displayed on 'SHOP' page if search is unsuccessful")
     def test_no_matches_found(self, driver):

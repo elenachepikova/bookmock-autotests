@@ -1,13 +1,11 @@
 import allure
 from selenium.webdriver.chrome.webdriver import WebDriver
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.wait import WebDriverWait
 
 
-class Actions:
-    SPINNER = (By.CSS_SELECTOR, ".loading-overlay")
+class BaseActions:
 
     def __init__(self, driver):
         self.driver: WebDriver = driver
@@ -36,7 +34,7 @@ class Actions:
             element.click()
 
     @allure.step('Fill in the field with {text}')
-    def input_text(self, text, selector):
+    def insert_text(self, text, selector):
         field = self.wait_for_element(selector)
         field.send_keys(text)
 
@@ -61,17 +59,8 @@ class Actions:
         select = Select(self.wait_for_element(selector))
         return select.select_by_value(value)
 
-    @allure.step('Get book title')
-    def get_book_title(self, book):
-        title = book.find_element(By.XPATH, ".//h5").text
-        return title
-
     @allure.step('Get element label for {selector[1]}')
     def get_label(self, selector):
         element = self.wait_for_element(selector)
         label = element.get_attribute("innerText").split("\n")
         return label[0]
-
-    @allure.step('Wait for page to load')
-    def wait_for_page_to_load(self):
-        self.wait_for_element_invisibility(self.SPINNER)

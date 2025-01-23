@@ -1,11 +1,9 @@
 import allure
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
 
-from core import Actions
+from core import BaseActions
 
 
-class Assertions(Actions):
+class Assertions(BaseActions):
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -14,16 +12,6 @@ class Assertions(Actions):
     def assert_element_is_visible(self, selector):
         element = self.wait_for_element(selector)
         assert element.is_displayed(), f"Element {selector} is not visible"
-
-    @allure.step('Assert element {selector} is selected')
-    def assert_element_is_selected(self, selector):
-        element = self.wait_for_element(selector)
-        assert element.is_selected(), f"Element {selector} is not selected"
-
-    @allure.step('Assert element {selector} is active')
-    def assert_element_is_active(self, selector):
-        element = self.wait_for_element(selector)
-        assert "active" in element.get_attribute("class"), f"Expected element to be active, but it is not."
 
     @allure.step('Assert page title and URL')
     def assert_page_title_and_url(self, title, url):

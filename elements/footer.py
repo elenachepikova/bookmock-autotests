@@ -2,10 +2,10 @@ import allure
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 
-from core import Actions, Assertions
+from core import Assertions
 
 
-class Footer(Actions):
+class Footer(Assertions):
     FOOTER = (By.CSS_SELECTOR, 'footer.bb-section')
     LOGO = (By.CSS_SELECTOR, '.mx-n2.d-flex.flex-wrap')
     FACEBOOK_ICON = (By.XPATH, '//*[@href="https://facebook.com/"]')
@@ -21,18 +21,17 @@ class Footer(Actions):
     def __init__(self, driver):
         super().__init__(driver)
         self.driver: WebDriver = driver
-        self.assertions = Assertions(self.driver)
 
     @allure.step('Assert that all footer section elements are present')
     def assert_footer_is_displayed(self):
-        self.assertions.assert_element_is_visible(self.FOOTER)
-        self.assertions.assert_element_is_visible(self.LOGO)
-        self.assertions.assert_element_is_visible(self.FACEBOOK_ICON)
-        self.assertions.assert_element_is_visible(self.INSTAGRAM_ICON)
-        self.assertions.assert_element_is_visible(self.LINKEDIN_ICON)
-        self.assertions.assert_element_is_visible(self.ADDRESS)
-        self.assertions.assert_element_is_visible(self.EMAIL)
-        self.assertions.assert_element_is_visible(self.MESSAGE)
-        self.assertions.assert_text(self.ADDRESS, self.address_text)
-        self.assertions.assert_text(self.EMAIL, self.email_text)
-        self.assertions.assert_text(self.MESSAGE, self.message_text)
+        self.assert_element_is_visible(self.FOOTER)
+        self.assert_element_is_visible(self.LOGO)
+        self.assert_element_is_visible(self.FACEBOOK_ICON)
+        self.assert_element_is_visible(self.INSTAGRAM_ICON)
+        self.assert_element_is_visible(self.LINKEDIN_ICON)
+        self.assert_element_is_visible(self.ADDRESS)
+        self.assert_element_is_visible(self.EMAIL)
+        self.assert_element_is_visible(self.MESSAGE)
+        self.assert_text(self.ADDRESS, self.address_text)
+        self.assert_text(self.EMAIL, self.email_text)
+        self.assert_text(self.MESSAGE, self.message_text)
