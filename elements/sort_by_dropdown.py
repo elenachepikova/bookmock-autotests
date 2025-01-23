@@ -1,5 +1,4 @@
 import allure
-from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 
 from core import CommonActions
@@ -10,7 +9,6 @@ class SortByDropdown(CommonActions):
 
     def __init__(self, driver):
         super().__init__(driver)
-        self.driver: WebDriver = driver
 
     @allure.step('Sort products by Recently Added date')
     def sort_by_recently_added(self):

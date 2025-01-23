@@ -1,5 +1,4 @@
 import allure
-from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 
 from core import Assertions
@@ -14,7 +13,6 @@ class Cart(Assertions):
 
     def __init__(self, driver):
         super().__init__(driver)
-        self.driver: WebDriver = driver
         self.message = self.wait_for_element(self.MESSAGE)
 
     @allure.step('Assert Cart sidebar is opened')

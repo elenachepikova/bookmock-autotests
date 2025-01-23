@@ -1,5 +1,4 @@
 import allure
-from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 
 from core import Assertions
@@ -20,7 +19,6 @@ class Footer(Assertions):
 
     def __init__(self, driver):
         super().__init__(driver)
-        self.driver: WebDriver = driver
 
     @allure.step('Assert that all footer section elements are present')
     def assert_footer_is_displayed(self):

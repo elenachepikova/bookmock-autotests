@@ -1,9 +1,8 @@
 import allure
-from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 
 from core import CommonActions
-from data import DOMAIN, TITLE, NOT_FOUND_MESSAGE
+from data import DOMAIN, TITLE
 
 
 class HomePage(CommonActions):
@@ -19,13 +18,11 @@ class HomePage(CommonActions):
     RECENT_REVIEWS_NAME = "RECENT REVIEWS"
     REVIEWS = (By.CSS_SELECTOR, '.col-12.col-md-6')
     SEARCH_AND_FILTER_BUTTON = (By.CSS_SELECTOR, '.d-block')
-    PRODUCT = (By.ID, 'store-products-12463756')
     PRODUCTS = (By.CSS_SELECTOR, '.col-6.col-sm-6')
     SHOP_LINK = (By.CSS_SELECTOR, '.content-breadcrumbs a')
 
     def __init__(self, driver):
         super().__init__(driver)
-        self.driver: WebDriver = driver
         self.page = f"{DOMAIN}/"
         self.title = TITLE
 
@@ -65,6 +62,3 @@ class HomePage(CommonActions):
 
     def assert_first_book_title(self, book_title):
         assert self.get_first_book_title(self.PRODUCTS) == book_title
-
-    def assert_no_results_found_message(self):
-        self.assert_text(self.PRODUCT, NOT_FOUND_MESSAGE)

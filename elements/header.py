@@ -1,5 +1,4 @@
 import allure
-from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 
 from core import Assertions
@@ -18,7 +17,6 @@ class NavigationPanel(Assertions):
 
     def __init__(self, driver):
         super().__init__(driver)
-        self.driver: WebDriver = driver
 
     @allure.step('Assert that all header navigation panel items are visible')
     def assert_header_is_displayed(self):

@@ -1,5 +1,4 @@
 import allure
-from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 
 from core import Assertions
@@ -13,7 +12,6 @@ class AboutPage(Assertions):
 
     def __init__(self, driver):
         super().__init__(driver)
-        self.driver: WebDriver = driver
         self.page = f'{DOMAIN}/about'
         self.title = f'ABOUT | {TITLE}'
 

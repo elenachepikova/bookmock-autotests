@@ -1,5 +1,4 @@
 import allure
-from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 
 from core import Assertions
@@ -11,7 +10,6 @@ class FormSubmittedPage(Assertions):
 
     def __init__(self, driver):
         super().__init__(driver)
-        self.driver: WebDriver = driver
         self.title = f'Form Submitted! | {TITLE}'
 
     @allure.step('Assert "Form Submitted!" page is opened')

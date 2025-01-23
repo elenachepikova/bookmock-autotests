@@ -1,5 +1,4 @@
 import allure
-from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 
 from core import Assertions
@@ -19,7 +18,6 @@ class SearchAndFilter(Assertions):
 
     def __init__(self, driver):
         super().__init__(driver)
-        self.driver: WebDriver = driver
 
     @allure.step('Assert Cart sidebar is opened')
     def assert_search_and_filter_sidebar_is_displayed(self):
@@ -61,7 +59,7 @@ class SearchAndFilter(Assertions):
     @allure.step('Assert "Search and Filter" sidebar is not displayed')
     def assert_search_and_filter_sidebar_is_not_displayed(self):
         self.wait_for_element_invisibility(self.SEARCH_AND_FILTER), ("'Search and Filter' "
-                                                                                "sidebar is still visible!")
+                                                                     "sidebar is still visible!")
 
     @allure.step('Enter {value} into "Search" field on "Search and Filter" sidebar')
     def fill_in_search_field(self, value):

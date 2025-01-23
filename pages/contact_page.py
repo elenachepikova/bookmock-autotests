@@ -1,7 +1,6 @@
 import time
 
 import allure
-from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 
 from core import Assertions
@@ -20,7 +19,6 @@ class ContactPage(Assertions):
 
     def __init__(self, driver, customer_data=None):
         super().__init__(driver)
-        self.driver: WebDriver = driver
         self.page = f'{DOMAIN}/contact'
         self.title = f'CONTACT | {TITLE}'
         self.customer_data = customer_data

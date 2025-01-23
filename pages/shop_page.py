@@ -1,9 +1,8 @@
 import allure
-from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 
 from core import CommonActions
-from data import DOMAIN, TITLE, NOT_FOUND_MESSAGE
+from data import DOMAIN, TITLE
 
 
 class ShopPage(CommonActions):
@@ -16,7 +15,6 @@ class ShopPage(CommonActions):
     PRICE_SECTION = (By.XPATH, '(//*[@class="form-group"])[4]')
     SORT_BY_DROPDOWN = (By.CSS_SELECTOR, '.form-group.mb-0')
     PRODUCTS = (By.CSS_SELECTOR, '.col-6.col-sm-6')
-    PRODUCT = (By.ID, 'store-products-12463765')
     SEARCH_RESULTS = (By.CSS_SELECTOR, '.search-results')
     PRICE_MIN_FIELD = (By.XPATH, '//*[contains(@class,"min-price")]')
     PRICE_MAX_FIELD = (By.XPATH, '//*[contains(@class,"max-price")]')
@@ -29,7 +27,6 @@ class ShopPage(CommonActions):
 
     def __init__(self, driver):
         super().__init__(driver)
-        self.driver: WebDriver = driver
         self.page = f'{DOMAIN}/shop'
         self.title = f'SHOP | {TITLE}'
 
@@ -135,6 +132,3 @@ class ShopPage(CommonActions):
     @allure.step('Clear max Price field on "Search and Filter" sidebar')
     def clear_price_max_field(self):
         self.clear_text(self.PRICE_MAX_FIELD)
-
-    def assert_no_results_found_message(self):
-        self.assert_text(self.PRODUCT, NOT_FOUND_MESSAGE)
