@@ -49,3 +49,6 @@ class CommonActions(Assertions):
 
     def click_on_product_link(self):
         self.click_on(self.PRODUCTS)
+
+    def click_on_add_to_cart_button(self):
+        self.click_on(self.ADD_TO_CART_BUTTON)

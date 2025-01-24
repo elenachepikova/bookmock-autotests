@@ -1,5 +1,6 @@
 import allure
 from selenium.webdriver.chrome.webdriver import WebDriver
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.wait import WebDriverWait
@@ -64,3 +65,11 @@ class BaseActions:
         element = self.wait_for_element(selector)
         label = element.get_attribute("innerText").split("\n")
         return label[0]
+
+    def switch_to_frame(self):
+        WebDriverWait(self.driver, 15).until(
+            EC.frame_to_be_available_and_switch_to_it((By.XPATH, '//iframe'))
+        )
+
+    def switch_to_default_content(self):
+        self.driver.switch_to.default_content()

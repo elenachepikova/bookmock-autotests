@@ -3,3 +3,4 @@ from .footer import Footer
 from .header import NavigationPanel
 from .search_and_filter import SearchAndFilter
 from .sort_by_dropdown import SortByDropdown
+from .product_modal import ProductModal
