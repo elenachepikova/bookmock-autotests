@@ -1,12 +1,12 @@
 import allure
 from selenium.webdriver.chrome.webdriver import WebDriver
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.wait import WebDriverWait
 
 
-class Actions:
+class BaseActions:
+
     def __init__(self, driver):
         self.driver: WebDriver = driver
 
@@ -20,7 +20,12 @@ class Actions:
         elements = WebDriverWait(self.driver, 10).until(EC.presence_of_all_elements_located(selector))
         return elements
 
-    @allure.step('Click_on {selector[1]}')
+    @allure.step('Wait for elements not to be displayed')
+    def wait_for_element_invisibility(self, selector):
+        invisibility = WebDriverWait(self.driver, 10).until(EC.invisibility_of_element_located(selector))
+        assert invisibility == True, f"Element {selector} is visible"
+
+    @allure.step('Click_on {selector}')
     def click_on(self, selector, force=False):
         element = self.wait_for_element(selector)
         if force:
@@ -29,7 +34,7 @@ class Actions:
             element.click()
 
     @allure.step('Fill in the field with {text}')
-    def input_text(self, text, selector):
+    def insert_text(self, text, selector):
         field = self.wait_for_element(selector)
         field.send_keys(text)
 
@@ -54,7 +59,8 @@ class Actions:
         select = Select(self.wait_for_element(selector))
         return select.select_by_value(value)
 
-    @allure.step('Get book title')
-    def get_book_title(self, book):
-        title = book.find_element(By.XPATH, ".//h5").text
-        return title
+    @allure.step('Get element label for {selector[1]}')
+    def get_label(self, selector):
+        element = self.wait_for_element(selector)
+        label = element.get_attribute("innerText").split("\n")
+        return label[0]

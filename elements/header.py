@@ -1,11 +1,10 @@
 import allure
-from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 
-from core import Actions, Assertions
+from core import Assertions
 
 
-class NavigationPanel(Actions):
+class NavigationPanel(Assertions):
     HEADER = (By.ID, 'bb-header-spacing')
     LOGO = (By.CSS_SELECTOR, '.d-flex.align-items-center.flex-wrap.flex-sm-nowrap')
     HOME = (By.XPATH, '//*[@role="menuitem"][1]')
@@ -18,20 +17,18 @@ class NavigationPanel(Actions):
 
     def __init__(self, driver):
         super().__init__(driver)
-        self.driver: WebDriver = driver
-        self.assertions = Assertions(self.driver)
 
     @allure.step('Assert that all header navigation panel items are visible')
     def assert_header_is_displayed(self):
-        self.assertions.assert_element_is_visible(self.HEADER)
-        self.assertions.assert_element_is_visible(self.LOGO)
-        self.assertions.assert_element_is_visible(self.HOME)
-        self.assertions.assert_element_is_visible(self.ABOUT)
-        self.assertions.assert_element_is_visible(self.SHOP)
-        self.assertions.assert_element_is_visible(self.FAQ)
-        self.assertions.assert_element_is_visible(self.CONTACT)
-        self.assertions.assert_element_is_visible(self.SHOP_NOW)
-        self.assertions.assert_element_is_visible(self.CART)
+        self.assert_element_is_visible(self.HEADER)
+        self.assert_element_is_visible(self.LOGO)
+        self.assert_element_is_visible(self.HOME)
+        self.assert_element_is_visible(self.ABOUT)
+        self.assert_element_is_visible(self.SHOP)
+        self.assert_element_is_visible(self.FAQ)
+        self.assert_element_is_visible(self.CONTACT)
+        self.assert_element_is_visible(self.SHOP_NOW)
+        self.assert_element_is_visible(self.CART)
 
     def click_on_logo(self):
         self.click_on(self.LOGO)

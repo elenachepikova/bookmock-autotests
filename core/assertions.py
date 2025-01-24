@@ -1,11 +1,11 @@
 import allure
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.common.by import By
 
-from core import Actions
+from core import BaseActions
 
 
-class Assertions(Actions):
+class Assertions(BaseActions):
+    BANNER_TITLE = (By.XPATH, '//*[@class=" bb-font-h2"]')
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -14,20 +14,6 @@ class Assertions(Actions):
     def assert_element_is_visible(self, selector):
         element = self.wait_for_element(selector)
         assert element.is_displayed(), f"Element {selector} is not visible"
-
-    def assert_element_is_not_visible(self, selector):
-        invisibility = WebDriverWait(self.driver, 10).until(EC.invisibility_of_element_located(selector))
-        assert invisibility == True, f"Element {selector} is visible"
-
-    @allure.step('Assert element {selector} is selected')
-    def assert_element_is_selected(self, selector):
-        element = self.wait_for_element(selector)
-        assert element.is_selected(), f"Element {selector} is not selected"
-
-    @allure.step('Assert element {selector} is active')
-    def assert_element_is_active(self, selector):
-        element = self.wait_for_element(selector)
-        assert "active" in element.get_attribute("class"), f"Expected element to be active, but it is not."
 
     @allure.step('Assert page title and URL')
     def assert_page_title_and_url(self, title, url):
@@ -39,6 +25,9 @@ class Assertions(Actions):
     def assert_text(self, selector, text):
         element = self.wait_for_element(selector)
         assert element.text == text, f'Text for {element} is not found'
+
+    def assert_banner_title(self, text):
+        self.assert_text(self.BANNER_TITLE, text)
 
     def assert_value(self, selector, expected_value):
         element = self.wait_for_element(selector)

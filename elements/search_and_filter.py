@@ -1,11 +1,10 @@
 import allure
-from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 
-from core import Actions, Assertions
+from core import Assertions
 
 
-class SearchAndFilter(Actions):
+class SearchAndFilter(Assertions):
     SEARCH_AND_FILTER = (By.CSS_SELECTOR, '.products-filter-panel.show')
     TITLE = (By.CSS_SELECTOR, '.mb-0.bb-font-h5')
     CLOSE_ICON = (By.CSS_SELECTOR, '.close')
@@ -19,21 +18,19 @@ class SearchAndFilter(Actions):
 
     def __init__(self, driver):
         super().__init__(driver)
-        self.driver: WebDriver = driver
-        self.assertions = Assertions(self.driver)
 
     @allure.step('Assert Cart sidebar is opened')
     def assert_search_and_filter_sidebar_is_displayed(self):
-        self.assertions.assert_element_is_visible(self.SEARCH_AND_FILTER)
-        self.assertions.assert_element_is_visible(self.TITLE)
-        self.assertions.assert_element_is_visible(self.CLOSE_ICON)
-        self.assertions.assert_element_is_visible(self.SEARCH_FILED)
-        self.assertions.assert_element_is_visible(self.FICTION_CHECKBOX)
-        self.assertions.assert_element_is_visible(self.POPULAR_CHECKBOX)
-        self.assertions.assert_element_is_visible(self.PRICE_MIN_FIELD)
-        self.assertions.assert_element_is_visible(self.PRICE_MAX_FIELD)
-        self.assertions.assert_element_is_visible(self.CLEAR_FILTER_BUTTON)
-        self.assertions.assert_element_is_visible(self.APPLY_BUTTON)
+        self.assert_element_is_visible(self.SEARCH_AND_FILTER)
+        self.assert_element_is_visible(self.TITLE)
+        self.assert_element_is_visible(self.CLOSE_ICON)
+        self.assert_element_is_visible(self.SEARCH_FILED)
+        self.assert_element_is_visible(self.FICTION_CHECKBOX)
+        self.assert_element_is_visible(self.POPULAR_CHECKBOX)
+        self.assert_element_is_visible(self.PRICE_MIN_FIELD)
+        self.assert_element_is_visible(self.PRICE_MAX_FIELD)
+        self.assert_element_is_visible(self.CLEAR_FILTER_BUTTON)
+        self.assert_element_is_visible(self.APPLY_BUTTON)
         self.assert_price_min_field_value("18")
         self.assert_price_max_field_value("25")
 
@@ -61,12 +58,12 @@ class SearchAndFilter(Actions):
 
     @allure.step('Assert "Search and Filter" sidebar is not displayed')
     def assert_search_and_filter_sidebar_is_not_displayed(self):
-        self.assertions.assert_element_is_not_visible(self.SEARCH_AND_FILTER), ("'Search and Filter' "
-                                                                                "sidebar is still visible!")
+        self.wait_for_element_invisibility(self.SEARCH_AND_FILTER), ("'Search and Filter' "
+                                                                     "sidebar is still visible!")
 
     @allure.step('Enter {value} into "Search" field on "Search and Filter" sidebar')
     def fill_in_search_field(self, value):
-        self.input_text(value, self.SEARCH_FILED)
+        self.insert_text(value, self.SEARCH_FILED)
 
     @allure.step('Clear "Search" field on "Search and Filter" sidebar')
     def clear_search_field(self):
@@ -74,26 +71,18 @@ class SearchAndFilter(Actions):
 
     @allure.step('Enter {value} into min Price field on "Search and Filter" sidebar')
     def fill_in_price_min_field(self, value):
-        self.clear_price_min_field()
-        self.input_text(value, self.PRICE_MIN_FIELD)
-
-    @allure.step('Clear min Price field on "Search and Filter" sidebar')
-    def clear_price_min_field(self):
         self.clear_text(self.PRICE_MIN_FIELD)
+        self.insert_text(value, self.PRICE_MIN_FIELD)
 
     @allure.step('Enter {value} into max Price field on "Search and Filter" sidebar')
     def fill_in_price_max_field(self, value):
-        self.clear_price_max_field()
-        self.input_text(value, self.PRICE_MAX_FIELD)
-
-    @allure.step('Clear max Price field on "Search and Filter" sidebar')
-    def clear_price_max_field(self):
         self.clear_text(self.PRICE_MAX_FIELD)
+        self.insert_text(value, self.PRICE_MAX_FIELD)
 
     @allure.step('Assert min Price value on "Search and Filter" sidebar')
     def assert_price_min_field_value(self, value):
-        self.assertions.assert_value(self.PRICE_MIN_FIELD, value)
+        self.assert_value(self.PRICE_MIN_FIELD, value)
 
     @allure.step('Assert max Price value on "Search and Filter" sidebar')
     def assert_price_max_field_value(self, value):
-        self.assertions.assert_value(self.PRICE_MAX_FIELD, value)
+        self.assert_value(self.PRICE_MAX_FIELD, value)
