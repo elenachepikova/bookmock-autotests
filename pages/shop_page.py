@@ -14,8 +14,6 @@ class ShopPage(CommonActions):
     COLLECTIONS_SECTION = (By.XPATH, '(//*[@class="form-group"])[3]')
     PRICE_SECTION = (By.XPATH, '(//*[@class="form-group"])[4]')
     SORT_BY_DROPDOWN = (By.CSS_SELECTOR, '.form-group.mb-0')
-    PRODUCTS = (By.CSS_SELECTOR, '.col-6.col-sm-6')
-    SEARCH_RESULTS = (By.CSS_SELECTOR, '.search-results')
     PRICE_MIN_FIELD = (By.XPATH, '//*[contains(@class,"min-price")]')
     PRICE_MAX_FIELD = (By.XPATH, '//*[contains(@class,"max-price")]')
     FEATURED_CHECKBOX = (By.ID, 'related-12463765-FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF')
@@ -51,32 +49,17 @@ class ShopPage(CommonActions):
         assert self.get_label(self.BROWSE_BY_SECTION) == "Browse By"
         assert self.get_label(self.COLLECTIONS_SECTION) == "Collections:"
         assert self.get_label(self.PRICE_SECTION) == "Price ($):"
-        self.assert_price_min_field_value("9")
-        self.assert_price_max_field_value("25")
-
-    def assert_products_count(self, value):
-        assert self.count_elements(self.PRODUCTS) == value, (f"Expected products count = {value}, "
-                                                             f"actual = {self.count_elements(self.PRODUCTS)}")
-        self.assert_text(self.SEARCH_RESULTS, f"Showing 1-{value} of {value} results")
-
-    @allure.step('Assert min Price value on "Search and Filter" sidebar')
-    def assert_price_min_field_value(self, value):
-        self.assert_value(self.PRICE_MIN_FIELD, value)
-
-    @allure.step('Assert max Price value on "Search and Filter" sidebar')
-    def assert_price_max_field_value(self, value):
-        self.assert_value(self.PRICE_MAX_FIELD, value)
+        self.assert_value(self.PRICE_MIN_FIELD, "9")
+        self.assert_value(self.PRICE_MAX_FIELD, "25")
 
     def click_on_search_button(self):
         self.click_on(self.SEARCH_BUTTON)
         self.wait_for_page_to_load()
 
-    @allure.step('Enter {value} into "Search" field on "SHOP" page')
-    def fill_in_search_field(self, value):
+    @allure.step('Enter {value} into "Search" field and click on "Search" button on "SHOP" page')
+    def apply_search_filter(self, value):
         self.insert_text(value, self.SEARCH_FILED)
-
-    def assert_first_book_title(self, book_title):
-        assert self.get_first_book_title(self.PRODUCTS) == book_title
+        self.click_on_search_button()
 
     @allure.step('Clear Filter on "SHOP" page')
     def clear_search_filter(self):
@@ -85,50 +68,36 @@ class ShopPage(CommonActions):
 
     @allure.step('Check "Featured" checkbox in "Browse By" section on "SHOP" page')
     def check_featured_checkbox(self):
-        self.click_on(self.FEATURED_CHECKBOX)
-        self.wait_for_page_to_load()
+        self.check_checkbox(self.FEATURED_CHECKBOX)
 
     @allure.step('Check "On Sale" checkbox in "Browse By" section on "SHOP" page')
     def check_on_sale_checkbox(self):
-        self.click_on(self.ON_SALE_CHECKBOX)
-        self.wait_for_page_to_load()
+        self.check_checkbox(self.ON_SALE_CHECKBOX)
 
     @allure.step('Check "In Stock" checkbox in "Browse By" section on "SHOP" page')
     def check_in_stock_checkbox(self):
-        self.click_on(self.IN_STOCK_CHECKBOX)
-        self.wait_for_page_to_load()
+        self.check_checkbox(self.IN_STOCK_CHECKBOX)
 
     @allure.step('Check "Fiction" checkbox in "Collections" section on "SHOP" page')
     def check_fiction_checkbox(self):
-        self.click_on(self.FICTION_CHECKBOX)
-        self.wait_for_page_to_load()
+        self.check_checkbox(self.FICTION_CHECKBOX)
 
     @allure.step('Check "Non-fiction" checkbox in "Collections" section on "SHOP" page')
     def check_non_fiction_checkbox(self):
-        self.click_on(self.NON_FICTION_CHECKBOX)
-        self.wait_for_page_to_load()
+        self.check_checkbox(self.NON_FICTION_CHECKBOX)
 
     @allure.step('Check "Popular" checkbox in "Collections" section on "SHOP" page')
     def check_popular_checkbox(self):
-        self.click_on(self.POPULAR_CHECKBOX)
-        self.wait_for_page_to_load()
+        self.check_checkbox(self.POPULAR_CHECKBOX)
 
-    @allure.step('Enter {value} into min Price field on "Search and Filter" sidebar')
+    @allure.step('Enter {value} into min Price field on "SHOP" page')
     def fill_in_price_min_field(self, value):
-        self.clear_price_min_field()
+        self.clear_text(self.PRICE_MIN_FIELD)
         self.insert_text(value, self.PRICE_MIN_FIELD)
         self.wait_for_page_to_load()
 
-    @allure.step('Clear min Price field on "Search and Filter" sidebar')
-    def clear_price_min_field(self):
-        self.clear_text(self.PRICE_MIN_FIELD)
-
-    @allure.step('Enter {value} into max Price field on "Search and Filter" sidebar')
+    @allure.step('Enter {value} into max Price field on "SHOP" page')
     def fill_in_price_max_field(self, value):
-        self.clear_price_max_field()
+        self.clear_text(self.PRICE_MAX_FIELD)
         self.insert_text(value, self.PRICE_MAX_FIELD)
         self.wait_for_page_to_load()
-
-    @allure.step('Clear max Price field on "Search and Filter" sidebar')
-    def clear_price_max_field(self):
-        self.clear_text(self.PRICE_MAX_FIELD)

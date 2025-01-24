@@ -16,3 +16,5 @@ class FormSubmittedPage(Assertions):
     def assert_page_is_displayed(self):
         self.assert_page_title_and_url(self.title)
         self.assert_element_is_visible(self.FORM_SUBMITTED_SECTION)
+        # to add assert_banner_title() method???
+

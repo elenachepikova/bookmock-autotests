@@ -31,6 +31,7 @@ class ContactPage(Assertions):
     def assert_page_is_displayed(self):
         self.assert_page_title_and_url(self.title, self.page)
         self.assert_element_is_visible(self.CONTACT_US_BANNER)
+        self.assert_banner_title("CONTACT US")
 
     @allure.step('Assert "CONTACT" page elements are present')
     def assert_sections_are_present(self):

@@ -1,9 +1,11 @@
 import allure
+from selenium.webdriver.common.by import By
 
 from core import BaseActions
 
 
 class Assertions(BaseActions):
+    BANNER_TITLE = (By.XPATH, '//*[@class=" bb-font-h2"]')
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -23,6 +25,9 @@ class Assertions(BaseActions):
     def assert_text(self, selector, text):
         element = self.wait_for_element(selector)
         assert element.text == text, f'Text for {element} is not found'
+
+    def assert_banner_title(self, text):
+        self.assert_text(self.BANNER_TITLE, text)
 
     def assert_value(self, selector, expected_value):
         element = self.wait_for_element(selector)

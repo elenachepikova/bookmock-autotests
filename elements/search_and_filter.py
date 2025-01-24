@@ -71,21 +71,13 @@ class SearchAndFilter(Assertions):
 
     @allure.step('Enter {value} into min Price field on "Search and Filter" sidebar')
     def fill_in_price_min_field(self, value):
-        self.clear_price_min_field()
-        self.insert_text(value, self.PRICE_MIN_FIELD)
-
-    @allure.step('Clear min Price field on "Search and Filter" sidebar')
-    def clear_price_min_field(self):
         self.clear_text(self.PRICE_MIN_FIELD)
+        self.insert_text(value, self.PRICE_MIN_FIELD)
 
     @allure.step('Enter {value} into max Price field on "Search and Filter" sidebar')
     def fill_in_price_max_field(self, value):
-        self.clear_price_max_field()
-        self.insert_text(value, self.PRICE_MAX_FIELD)
-
-    @allure.step('Clear max Price field on "Search and Filter" sidebar')
-    def clear_price_max_field(self):
         self.clear_text(self.PRICE_MAX_FIELD)
+        self.insert_text(value, self.PRICE_MAX_FIELD)
 
     @allure.step('Assert min Price value on "Search and Filter" sidebar')
     def assert_price_min_field_value(self, value):

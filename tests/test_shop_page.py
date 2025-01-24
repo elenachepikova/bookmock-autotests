@@ -28,8 +28,7 @@ class TestShopPage:
     def test_search_by_name(self, driver, value, title):
         shop_page = ShopPage(driver)
         shop_page.open()
-        shop_page.fill_in_search_field(value)
-        shop_page.click_on_search_button()
+        shop_page.apply_search_filter(value)
         shop_page.assert_products_count(1)
         shop_page.assert_first_book_title(title)
 
@@ -37,8 +36,7 @@ class TestShopPage:
     def test_clear_search_filter(self, driver):
         shop_page = ShopPage(driver)
         shop_page.open()
-        shop_page.fill_in_search_field("gre")
-        shop_page.click_on_search_button()
+        shop_page.apply_search_filter("gre")
         shop_page.assert_products_count(1)
         shop_page.assert_first_book_title(HAPPINESS_TITLE)
         shop_page.clear_search_filter()

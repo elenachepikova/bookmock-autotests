@@ -23,6 +23,7 @@ class AboutPage(Assertions):
     def assert_page_is_displayed(self):
         self.assert_page_title_and_url(self.title, self.page)
         self.assert_element_is_visible(self.ABOUT_US_BANNER)
+        self.assert_banner_title("ABOUT US")
 
     def click_on_contact_us_button(self):
         self.click_on(self.CONTACT_US)
