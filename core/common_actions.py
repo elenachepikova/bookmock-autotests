@@ -7,10 +7,11 @@ from data import NOT_FOUND_MESSAGE
 
 class CommonActions(Assertions):
     SPINNER = (By.CSS_SELECTOR, ".loading-overlay")
-    PRODUCT = (By.ID, 'store-products-12463756')
+    PRODUCT = (By.CSS_SELECTOR, '.store-products')
     PRODUCTS = (By.CSS_SELECTOR, '.col-6.col-sm-6')
     SEARCH_RESULTS = (By.CSS_SELECTOR, '.search-results')
     SHOP_LINK = (By.CSS_SELECTOR, '.content-breadcrumbs a')
+    ADD_TO_CART_BUTTON = (By.CSS_SELECTOR, '.btn.sm-add-to-cart')
 
     def __init__(self, driver):
         super().__init__(driver)
