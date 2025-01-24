@@ -46,3 +46,6 @@ class CommonActions(Assertions):
     def sort_by_value(self, selector, value):
         self.select_dropdown_option(selector, value)
         self.wait_for_page_to_load()
+
+    def click_on_product_link(self):
+        self.click_on(self.PRODUCTS)
