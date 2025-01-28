@@ -36,9 +36,10 @@ class HomePage(CommonActions):
         self.assert_element_is_visible(self.BANNER), 'BANNER not displayed'
         self.assert_element_is_visible(self.FEATURED_SECTION), 'FEATURED_SECTION not displayed'
         self.assert_element_is_visible(self.RECENT_REVIEWS), 'RECENT_REVIEWS not displayed'
-        self.assert_text(self.FEATURED_SECTION_TITLE, "Featured")
-        self.assert_text(self.RECENT_REVIEWS_TITLE, "RECENT REVIEWS")
-        assert self.count_elements(self.REVIEWS) == 2
+        self.assert_text(self.FEATURED_SECTION_TITLE, "Featured"), "FEATURED_SECTION_TITLE not 'Featured'"
+        self.assert_text(self.RECENT_REVIEWS_TITLE, "RECENT REVIEWS"), "RECENT_REVIEWS_TITLE not 'RECENT REVIEWS'"
+        assert self.count_elements(self.REVIEWS) == 2, "Number of RECENT REVIEWS != 2"
 
+    @allure.step('Click on "Search and Filter" button on HOME page')
     def click_on_search_and_filter_button(self):
         self.click_on(self.SEARCH_AND_FILTER_BUTTON)

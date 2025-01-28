@@ -25,8 +25,10 @@ class AboutPage(Assertions):
         self.assert_element_is_visible(self.ABOUT_US_BANNER)
         self.assert_banner_title("ABOUT US")
 
+    @allure.step('Click on "CONTACT US" button on ABOUT page')
     def click_on_contact_us_button(self):
         self.click_on(self.CONTACT_US)
 
+    @allure.step('Click on "SHOP NOW" button on ABOUT page')
     def click_on_shop_now_button(self):
         self.click_on(self.SHOP_NOW)

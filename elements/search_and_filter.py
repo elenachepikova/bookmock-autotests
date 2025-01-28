@@ -19,20 +19,20 @@ class SearchAndFilter(Assertions):
     def __init__(self, driver):
         super().__init__(driver)
 
-    @allure.step('Assert Cart sidebar is opened')
+    @allure.step('Assert "Search and Filter" sidebar UI')
     def assert_search_and_filter_sidebar_is_displayed(self):
-        self.assert_element_is_visible(self.SEARCH_AND_FILTER)
-        self.assert_element_is_visible(self.TITLE)
-        self.assert_element_is_visible(self.CLOSE_ICON)
-        self.assert_element_is_visible(self.SEARCH_FILED)
-        self.assert_element_is_visible(self.FICTION_CHECKBOX)
-        self.assert_element_is_visible(self.POPULAR_CHECKBOX)
-        self.assert_element_is_visible(self.PRICE_MIN_FIELD)
-        self.assert_element_is_visible(self.PRICE_MAX_FIELD)
-        self.assert_element_is_visible(self.CLEAR_FILTER_BUTTON)
-        self.assert_element_is_visible(self.APPLY_BUTTON)
-        self.assert_price_min_field_value("18")
-        self.assert_price_max_field_value("25")
+        self.assert_element_is_visible(self.SEARCH_AND_FILTER), f"SEARCH_AND_FILTER sidebar not displayed"
+        self.assert_element_is_visible(self.TITLE), f"SEARCH_AND_FILTER TITLE not displayed"
+        self.assert_element_is_visible(self.CLOSE_ICON), f"SEARCH_AND_FILTER CLOSE_ICON not displayed"
+        self.assert_element_is_visible(self.SEARCH_FILED), f"SEARCH_AND_FILTER SEARCH_FILED not displayed"
+        self.assert_element_is_visible(self.FICTION_CHECKBOX), f"SEARCH_AND_FILTER FICTION_CHECKBOX not displayed"
+        self.assert_element_is_visible(self.POPULAR_CHECKBOX), f"SEARCH_AND_FILTER POPULAR_CHECKBOX not displayed"
+        self.assert_element_is_visible(self.PRICE_MIN_FIELD), f"SEARCH_AND_FILTER PRICE_MIN_FIELD not displayed"
+        self.assert_element_is_visible(self.PRICE_MAX_FIELD), f"SEARCH_AND_FILTER PRICE_MAX_FIELD not displayed"
+        self.assert_element_is_visible(self.CLEAR_FILTER_BUTTON), f"SEARCH_AND_FILTER CLEAR_FILTER_BUTTON not displayed"
+        self.assert_element_is_visible(self.APPLY_BUTTON), f"SEARCH_AND_FILTER APPLY_BUTTON not displayed"
+        self.assert_price_min_field_value("18"), f"PRICE_MIN_FIELD default value is not 18"
+        self.assert_price_max_field_value("25"), f"PRICE_MAX_FIELD default value is not 25"
 
     @allure.step('Close "Search and Filter" sidebar by click on close icon')
     def click_on_close_icon(self):
