@@ -20,7 +20,7 @@ class Footer(Assertions):
     def __init__(self, driver):
         super().__init__(driver)
 
-    @allure.step('Assert that all footer section elements are present')
+    @allure.step('Assert footer section elements presence')
     def assert_footer_is_displayed(self):
         self.assert_element_is_visible(self.FOOTER)
         self.assert_element_is_visible(self.LOGO)

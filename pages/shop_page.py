@@ -45,13 +45,14 @@ class ShopPage(CommonActions):
         self.assert_element_is_visible(self.COLLECTIONS_SECTION), 'COLLECTIONS_SECTION not displayed'
         self.assert_element_is_visible(self.PRICE_SECTION), 'PRICE_SECTION not displayed'
         self.assert_element_is_visible(self.SORT_BY_DROPDOWN), 'SORT_BY_DROPDOWN not displayed'
-        assert self.get_label(self.SEARCH_SECTION) == "Search"
-        assert self.get_label(self.BROWSE_BY_SECTION) == "Browse By"
-        assert self.get_label(self.COLLECTIONS_SECTION) == "Collections:"
-        assert self.get_label(self.PRICE_SECTION) == "Price ($):"
-        self.assert_value(self.PRICE_MIN_FIELD, "9")
-        self.assert_value(self.PRICE_MAX_FIELD, "25")
+        assert self.get_label(self.SEARCH_SECTION) == "Search", "SEARCH_SECTION title is not 'Search'"
+        assert self.get_label(self.BROWSE_BY_SECTION) == "Browse By", "BROWSE_BY_SECTION title is not 'Browse By'"
+        assert self.get_label(self.COLLECTIONS_SECTION) == "Collections:", "COLLECTIONS title is not 'Collections:'"
+        assert self.get_label(self.PRICE_SECTION) == "Price ($):", "PRICE_SECTION title is not 'Price ($):'"
+        self.assert_value(self.PRICE_MIN_FIELD, "9"), "PRICE_MIN_FIELD default value != 9"
+        self.assert_value(self.PRICE_MAX_FIELD, "25"), "PRICE_MAX_FIELD default value != 25"
 
+    @allure.step('Click on Search icon for "Search" field')
     def click_on_search_button(self):
         self.click_on(self.SEARCH_BUTTON)
         self.wait_for_page_to_load()

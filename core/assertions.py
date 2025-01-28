@@ -27,13 +27,16 @@ class Assertions(BaseActions):
         if url is not None:
             assert self.driver.current_url == url, f"Url should be {url}, but is {self.driver.current_url}"
 
+    @allure.step('Assert {selector} field contains text {text}')
     def assert_text(self, selector, text):
         element = self.wait_for_element(selector)
-        assert element.text == text, f'Text for {element} is not found'
+        assert element.text == text, f'Expected text: {text}, actual: {element.text}'
 
+    @allure.step('Assert page main banner contains text {text}')
     def assert_banner_title(self, text):
-        self.assert_text(self.BANNER_TITLE, text)
+        self.assert_text(self.BANNER_TITLE, text), f"Actual banner text does not correspond to expected"
 
+    @allure.step('Assert {selector} field contains value {expected_value}')
     def assert_value(self, selector, expected_value):
         element = self.wait_for_element(selector)
         actual_value = element.get_attribute("value")

@@ -21,7 +21,7 @@ class BaseActions:
         elements = WebDriverWait(self.driver, 10).until(EC.presence_of_all_elements_located(selector))
         return elements
 
-    @allure.step('Wait for elements not to be displayed')
+    @allure.step('Wait for element not to be displayed')
     def wait_for_element_invisibility(self, selector):
         invisibility = WebDriverWait(self.driver, 10).until(EC.invisibility_of_element_located(selector))
         assert invisibility == True, f"Element {selector} is visible"
@@ -43,7 +43,7 @@ class BaseActions:
     def clear_text(self, selector):
         field = self.wait_for_element(selector)
         field.clear()
-        assert field.get_attribute("value") == ''
+        assert field.get_attribute("value") == '', f"Field {selector[1]} is not empty"
 
     @allure.step('Count the number of elements found by selector')
     def count_elements(self, selector):
@@ -60,16 +60,18 @@ class BaseActions:
         select = Select(self.wait_for_element(selector))
         return select.select_by_value(value)
 
-    @allure.step('Get element label for {selector[1]}')
+    @allure.step('Get element label for {selector}')
     def get_label(self, selector):
         element = self.wait_for_element(selector)
         label = element.get_attribute("innerText").split("\n")
         return label[0]
 
+    @allure.step('Switch to iframe')
     def switch_to_frame(self):
         WebDriverWait(self.driver, 15).until(
             EC.frame_to_be_available_and_switch_to_it((By.XPATH, '//iframe'))
         )
 
+    @allure.step('Switch back from iframe to default content')
     def switch_to_default_content(self):
         self.driver.switch_to.default_content()
