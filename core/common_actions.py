@@ -35,7 +35,7 @@ class CommonActions(Assertions):
     def assert_no_results_found_message(self):
         self.assert_text(self.PRODUCT, NOT_FOUND_MESSAGE)
 
-    @allure.step('Assert elements count is {value}')
+    @allure.step('Assert products count is {value}')
     def assert_products_count(self, value):
         assert self.count_elements(self.PRODUCTS) == value, (f"Expected products count = {value}, "
                                                              f"actual = {self.count_elements(self.PRODUCTS)}")

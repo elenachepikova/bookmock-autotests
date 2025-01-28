@@ -45,3 +45,16 @@ class ProductActions(CommonActions):
     @allure.step('Assert cover selector is NOT present for regular product')
     def assert_cover_selector_absence(self):
         self.assert_element_absense(self.COVER_SELECTOR), 'COVER_SELECTOR is displayed'
+
+    @allure.step('Select "Hard" option in Cover drop-down')
+    def select_hard_cover(self):
+        self.select_dropdown_option(self.COVER_SELECTOR, "A")
+
+    @allure.step('Select "Soft" option in Cover drop-down')
+    def select_soft_cover(self):
+        self.select_dropdown_option(self.COVER_SELECTOR, "B")
+
+    @allure.step('Set {value} value in Quantity field')
+    def set_quantity(self, value):
+        self.clear_text(self.QUANTITY_FIELD)
+        self.insert_text(value, self.QUANTITY_FIELD)

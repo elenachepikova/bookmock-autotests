@@ -7,6 +7,7 @@ from core import ProductActions
 class ProductModal(ProductActions):
     CLOSE_ICON = (By.CSS_SELECTOR, '.close')
 
+
     def __init__(self, driver):
         super().__init__(driver)
 
