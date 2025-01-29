@@ -1,13 +1,15 @@
 import allure
 import pytest
 
-from data import HARRY_POTTER_TITLE, TWILIGHT_TITLE
+from data import products
 from elements import Footer, NavigationPanel, SortByDropdown
 from pages import HomePage, ShopPage
 
 
 @allure.suite("'HOME' page")
 class TestHomePage:
+    harry_potter = products["Harry Potter"]["title"]
+    twilight = products["Twilight"]["title"]
 
     @allure.title("'HOME' page is accessible")
     def test_open_homepage(self, driver):
@@ -34,11 +36,11 @@ class TestHomePage:
         shop_page.assert_page_is_displayed()
 
     @pytest.mark.parametrize("dropdown_option, title",
-                             [(lambda dropdown: dropdown.sort_by_recently_added(), TWILIGHT_TITLE),
-                              (lambda dropdown: dropdown.sort_by_price_low_high(), HARRY_POTTER_TITLE),
-                              (lambda dropdown: dropdown.sort_by_price_high_low(), TWILIGHT_TITLE),
-                              (lambda dropdown: dropdown.sort_by_name_a_z(), HARRY_POTTER_TITLE),
-                              (lambda dropdown: dropdown.sort_by_name_z_a(), TWILIGHT_TITLE)])
+                             [(lambda dropdown: dropdown.sort_by_recently_added(), twilight),
+                              (lambda dropdown: dropdown.sort_by_price_low_high(), harry_potter),
+                              (lambda dropdown: dropdown.sort_by_price_high_low(), twilight),
+                              (lambda dropdown: dropdown.sort_by_name_a_z(), harry_potter),
+                              (lambda dropdown: dropdown.sort_by_name_z_a(), twilight)])
     @allure.title("Sort Featured section items with 'Sort By' drop-down")
     def test_sort_featured_products(self, driver, dropdown_option, title):
         homepage = HomePage(driver)

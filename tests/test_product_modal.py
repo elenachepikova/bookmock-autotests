@@ -1,12 +1,15 @@
 import allure
 
-from data import HARRY_POTTER_TITLE, HAPPINESS_TITLE, TWILIGHT_TITLE
+from data import products
 from elements import SearchAndFilter, ProductModal
 from pages import HomePage, ShopPage
 
 
 @allure.suite("Product modal")
 class TestProductModal:
+    harry_potter = products["Harry Potter"]["title"]
+    twilight = products["Twilight"]["title"]
+    happiness = products["Happiness"]["title"]
 
     @allure.title("Open regular Product modal from 'Featured' section on HOME page")
     def test_open_regular_product_modal_from_home_page(self, driver):
@@ -24,7 +27,7 @@ class TestProductModal:
         product_modal.assert_cover_selector_absence()
         product_modal.click_on_close_icon()
         homepage.assert_products_count(1)
-        homepage.assert_first_book_title(TWILIGHT_TITLE)
+        homepage.assert_first_book_title(self.twilight)
 
     @allure.title("Open Product modal for discounted product from 'All Products' section on SHOP page")
     def test_open_on_sale_product_modal_from_shop_page(self, driver):
@@ -39,7 +42,7 @@ class TestProductModal:
         product_modal.assert_cover_selector_absence()
         product_modal.click_on_close_icon()
         shop_page.assert_products_count(1)
-        shop_page.assert_first_book_title(HAPPINESS_TITLE)
+        shop_page.assert_first_book_title(self.happiness)
 
     @allure.title("Open Product modal for product with cover options from 'All Products' section on SHOP page")
     def test_open_with_options_product_modal_from_shop_page(self, driver):
@@ -54,4 +57,4 @@ class TestProductModal:
         product_modal.assert_cover_selector_presence()
         product_modal.click_on_close_icon()
         shop_page.assert_products_count(1)
-        shop_page.assert_first_book_title(HARRY_POTTER_TITLE)
+        shop_page.assert_first_book_title(self.harry_potter)
