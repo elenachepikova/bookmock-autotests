@@ -5,16 +5,22 @@ from core import Assertions
 
 
 class SearchAndFilter(Assertions):
-    SEARCH_AND_FILTER = (By.CSS_SELECTOR, '.products-filter-panel.show')
-    TITLE = (By.CSS_SELECTOR, '.mb-0.bb-font-h5')
-    CLOSE_ICON = (By.CSS_SELECTOR, '.close')
+    SEARCH_AND_FILTER = (By.CSS_SELECTOR, ".products-filter-panel.show")
+    TITLE = (By.CSS_SELECTOR, ".mb-0.bb-font-h5")
+    CLOSE_ICON = (By.CSS_SELECTOR, ".close")
     SEARCH_FILED = (By.XPATH, '(//input[@name="search"])[2]')
-    FICTION_CHECKBOX = (By.ID, 'related-12463756-CE90C2D4-7D05-93F8-041C-69F83F445526-panel')
-    POPULAR_CHECKBOX = (By.ID, 'related-12463756-989E66B3-3ABA-A088-80F2-2DCBA7AE1641-panel')
+    FICTION_CHECKBOX = (
+        By.ID,
+        "related-12463756-CE90C2D4-7D05-93F8-041C-69F83F445526-panel",
+    )
+    POPULAR_CHECKBOX = (
+        By.ID,
+        "related-12463756-989E66B3-3ABA-A088-80F2-2DCBA7AE1641-panel",
+    )
     PRICE_MIN_FIELD = (By.XPATH, '(//*[contains(@class,"min-price")])[2]')
     PRICE_MAX_FIELD = (By.XPATH, '(//*[contains(@class,"max-price")])[2]')
-    CLEAR_FILTER_BUTTON = (By.CSS_SELECTOR, '.clear-filter')
-    APPLY_BUTTON = (By.CSS_SELECTOR, '.apply-filter')
+    CLEAR_FILTER_BUTTON = (By.CSS_SELECTOR, ".clear-filter")
+    APPLY_BUTTON = (By.CSS_SELECTOR, ".apply-filter")
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -48,18 +54,23 @@ class SearchAndFilter(Assertions):
         self.click_on(self.CLEAR_FILTER_BUTTON)
         self.assert_search_and_filter_sidebar_is_not_displayed()
 
-    @allure.step('Check "Popular" checkbox in "Collections" section on "Search and Filter" sidebar')
+    @allure.step(
+        'Check "Popular" checkbox in "Collections" section on "Search and Filter" sidebar'
+    )
     def check_popular_checkbox(self):
         self.click_on(self.POPULAR_CHECKBOX)
 
-    @allure.step('Check "Fiction" checkbox in "Collections" section on "Search and Filter" sidebar')
+    @allure.step(
+        'Check "Fiction" checkbox in "Collections" section on "Search and Filter" sidebar'
+    )
     def check_fiction_checkbox(self):
         self.click_on(self.FICTION_CHECKBOX)
 
     @allure.step('Assert "Search and Filter" sidebar is not displayed')
     def assert_search_and_filter_sidebar_is_not_displayed(self):
-        self.wait_for_element_invisibility(self.SEARCH_AND_FILTER), ("'Search and Filter' "
-                                                                     "sidebar is still visible!")
+        self.wait_for_element_invisibility(self.SEARCH_AND_FILTER), (
+            "'Search and Filter' " "sidebar is still visible!"
+        )
 
     @allure.step('Enter {value} into "Search" field on "Search and Filter" sidebar')
     def fill_in_search_field(self, value):

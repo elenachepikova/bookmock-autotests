@@ -28,7 +28,7 @@ class TestCart:
         homepage.open()
         homepage.click_on_search_and_filter_button()
         search_sidebar = SearchAndFilter(driver)
-        search_sidebar.fill_in_search_field('twilight')
+        search_sidebar.fill_in_search_field("twilight")
         search_sidebar.click_on_apply_button()
         homepage.click_on_add_to_cart_button()
         homepage.switch_to_frame()

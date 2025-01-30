@@ -21,9 +21,7 @@ class TestSearchAndFilterSidebar:
         search_sidebar.click_on_close_icon()
         search_sidebar.assert_search_and_filter_sidebar_is_not_displayed()
 
-    @pytest.mark.parametrize("value, title",
-                             [("har", harry_potter),
-                              ("twi", twilight)])
+    @pytest.mark.parametrize("value, title", [("har", harry_potter), ("twi", twilight)])
     @allure.title("Filter Featured section by product name Search")
     def test_search_by_name(self, driver, value, title):
         homepage = HomePage(driver)
@@ -97,9 +95,9 @@ class TestSearchAndFilterSidebar:
         search_sidebar.click_on_clear_filter_button()
         homepage.assert_products_count(2)
 
-    @pytest.mark.parametrize("price_min, price_max, title",
-                             [(18, 20, harry_potter),
-                              (20, 25, twilight)])
+    @pytest.mark.parametrize(
+        "price_min, price_max, title", [(18, 20, harry_potter), (20, 25, twilight)]
+    )
     @allure.title("Filter Featured products by Price")
     def test_filter_by_price(self, driver, price_min, price_max, title):
         homepage = HomePage(driver)

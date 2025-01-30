@@ -6,16 +6,16 @@ from data import DOMAIN, TITLE
 
 
 class AboutPage(Assertions):
-    ABOUT_US_BANNER = (By.ID, 'bb-section-5129237E-F62C-D51F-8FF0-2BFF121EE5F7')
+    ABOUT_US_BANNER = (By.ID, "bb-section-5129237E-F62C-D51F-8FF0-2BFF121EE5F7")
     CONTACT_US = (By.XPATH, '//button[contains(text(),"CONTACT US")]')
-    SHOP_NOW = (By.CSS_SELECTOR, 'button.btn-secondary')
+    SHOP_NOW = (By.CSS_SELECTOR, "button.btn-secondary")
 
     def __init__(self, driver):
         super().__init__(driver)
-        self.page = f'{DOMAIN}/about'
-        self.title = f'ABOUT | {TITLE}'
+        self.page = f"{DOMAIN}/about"
+        self.title = f"ABOUT | {TITLE}"
 
-    @allure.step('Open About page')
+    @allure.step("Open About page")
     def open(self):
         self.driver.get(self.page)
 

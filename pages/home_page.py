@@ -6,22 +6,22 @@ from data import DOMAIN, TITLE
 
 
 class HomePage(CommonActions):
-    BANNER = (By.ID, 'bb-section-512921E4-B305-83EC-0A36-1A624B3CBBFA')
+    BANNER = (By.ID, "bb-section-512921E4-B305-83EC-0A36-1A624B3CBBFA")
     BANNER_NAME = "Welcome to BookMock!"
-    FEATURED_SECTION = (By.ID, 'bb-section-512921E5-B3EE-81BE-E747-F1A82516138D')
+    FEATURED_SECTION = (By.ID, "bb-section-512921E5-B3EE-81BE-E747-F1A82516138D")
     FEATURED_SECTION_TITLE = (By.XPATH, '//*[@class="bb-font-h2"]')
-    RECENT_REVIEWS = (By.ID, 'bb-section-512921E6-02B3-DB71-72CB-05545E668750')
+    RECENT_REVIEWS = (By.ID, "bb-section-512921E6-02B3-DB71-72CB-05545E668750")
     RECENT_REVIEWS_TITLE = (By.XPATH, '//*[@class=" bb-font-h3"]')
     RECENT_REVIEWS_NAME = "RECENT REVIEWS"
-    REVIEWS = (By.CSS_SELECTOR, '.col-12.col-md-6')
-    SEARCH_AND_FILTER_BUTTON = (By.CSS_SELECTOR, '.d-block')
+    REVIEWS = (By.CSS_SELECTOR, ".col-12.col-md-6")
+    SEARCH_AND_FILTER_BUTTON = (By.CSS_SELECTOR, ".d-block")
 
     def __init__(self, driver):
         super().__init__(driver)
         self.page = f"{DOMAIN}/"
         self.title = TITLE
 
-    @allure.step('Open Home page')
+    @allure.step("Open Home page")
     def open(self):
         self.driver.get(self.page)
 

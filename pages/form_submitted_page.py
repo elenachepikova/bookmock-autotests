@@ -6,11 +6,11 @@ from data import TITLE
 
 
 class FormSubmittedPage(Assertions):
-    FORM_SUBMITTED_SECTION = (By.ID, 'bb-section-form-confirmation-section-boilerplate')
+    FORM_SUBMITTED_SECTION = (By.ID, "bb-section-form-confirmation-section-boilerplate")
 
     def __init__(self, driver):
         super().__init__(driver)
-        self.title = f'Form Submitted! | {TITLE}'
+        self.title = f"Form Submitted! | {TITLE}"
 
     @allure.step('Assert "Form Submitted!" page is opened')
     def assert_page_is_displayed(self):

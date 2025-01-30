@@ -6,21 +6,21 @@ from data import DOMAIN, TITLE
 
 
 class ProductPage(ProductActions):
-    NAVIGATION_SECTION = (By.CSS_SELECTOR, 'nav.d-flex.mb-4')
+    NAVIGATION_SECTION = (By.CSS_SELECTOR, "nav.d-flex.mb-4")
 
     def __init__(self, driver):
         super().__init__(driver)
 
     @staticmethod
-    @allure.step('Generate product page url based on given path')
+    @allure.step("Generate product page url based on given path")
     def get_page_url(path):
-        page = f'{DOMAIN}/shop/product/{path}'
+        page = f"{DOMAIN}/shop/product/{path}"
         return page
 
     @staticmethod
-    @allure.step('Generate product page url based on given product title')
+    @allure.step("Generate product page url based on given product title")
     def get_page_title(book_title):
-        title = f'{book_title} | {TITLE}'
+        title = f"{book_title} | {TITLE}"
         return title
 
     @allure.step('Assert "Product" is opened')
@@ -32,12 +32,12 @@ class ProductPage(ProductActions):
         self.assert_element_is_visible(self.PRODUCT_NAME)
         self.assert_text(self.PRODUCT_NAME, book_title)
 
-    @allure.step('Open Product page')
+    @allure.step("Open Product page")
     def open(self, path):
         page = self.get_page_url(path)
         self.driver.get(page)
 
-    @allure.step('Assert Product page UI')
+    @allure.step("Assert Product page UI")
     def assert_product_page_ui(self):
         self.assert_element_is_visible(self.NAVIGATION_SECTION)
         self.assert_product_elements()

@@ -35,12 +35,16 @@ class TestHomePage:
         shop_page = ShopPage(driver)
         shop_page.assert_page_is_displayed()
 
-    @pytest.mark.parametrize("dropdown_option, title",
-                             [(lambda dropdown: dropdown.sort_by_recently_added(), twilight),
-                              (lambda dropdown: dropdown.sort_by_price_low_high(), harry_potter),
-                              (lambda dropdown: dropdown.sort_by_price_high_low(), twilight),
-                              (lambda dropdown: dropdown.sort_by_name_a_z(), harry_potter),
-                              (lambda dropdown: dropdown.sort_by_name_z_a(), twilight)])
+    @pytest.mark.parametrize(
+        "dropdown_option, title",
+        [
+            (lambda dropdown: dropdown.sort_by_recently_added(), twilight),
+            (lambda dropdown: dropdown.sort_by_price_low_high(), harry_potter),
+            (lambda dropdown: dropdown.sort_by_price_high_low(), twilight),
+            (lambda dropdown: dropdown.sort_by_name_a_z(), harry_potter),
+            (lambda dropdown: dropdown.sort_by_name_z_a(), twilight),
+        ],
+    )
     @allure.title("Sort Featured section items with 'Sort By' drop-down")
     def test_sort_featured_products(self, driver, dropdown_option, title):
         homepage = HomePage(driver)

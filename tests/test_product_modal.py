@@ -29,7 +29,9 @@ class TestProductModal:
         homepage.assert_products_count(1)
         homepage.assert_first_book_title(self.twilight)
 
-    @allure.title("Open Product modal for discounted product from 'All Products' section on SHOP page")
+    @allure.title(
+        "Open Product modal for discounted product from 'All Products' section on SHOP page"
+    )
     def test_open_on_sale_product_modal_from_shop_page(self, driver):
         shop_page = ShopPage(driver)
         shop_page.open()
@@ -44,7 +46,9 @@ class TestProductModal:
         shop_page.assert_products_count(1)
         shop_page.assert_first_book_title(self.happiness)
 
-    @allure.title("Open Product modal for product with cover options from 'All Products' section on SHOP page")
+    @allure.title(
+        "Open Product modal for product with cover options from 'All Products' section on SHOP page"
+    )
     def test_open_with_options_product_modal_from_shop_page(self, driver):
         shop_page = ShopPage(driver)
         shop_page.open()

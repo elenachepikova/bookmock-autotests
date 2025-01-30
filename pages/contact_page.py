@@ -8,9 +8,9 @@ from data import DOMAIN, TITLE
 
 
 class ContactPage(Assertions):
-    CONTACT_US_BANNER = (By.ID, 'bb-section-51292A57-9603-A922-BC8E-363F9F372AE4')
-    CONTACT_US_SECTION = (By.ID, 'bb-section-51292A58-BF7C-41C2-A137-AA892D924926')
-    FIND_US_SECTION = (By.ID, 'bb-section-51292A59-E3FC-802D-398A-7CA900B7C05F')
+    CONTACT_US_BANNER = (By.ID, "bb-section-51292A57-9603-A922-BC8E-363F9F372AE4")
+    CONTACT_US_SECTION = (By.ID, "bb-section-51292A58-BF7C-41C2-A137-AA892D924926")
+    FIND_US_SECTION = (By.ID, "bb-section-51292A59-E3FC-802D-398A-7CA900B7C05F")
     FIRST_NAME_FIELD = (By.XPATH, '//*[@name="First Name"]')
     LAST_NAME_FIELD = (By.XPATH, '//*[@name="Last Name"]')
     EMAIL_FIELD = (By.XPATH, '//*[@name="Email"]')
@@ -19,11 +19,11 @@ class ContactPage(Assertions):
 
     def __init__(self, driver, customer_data=None):
         super().__init__(driver)
-        self.page = f'{DOMAIN}/contact'
-        self.title = f'CONTACT | {TITLE}'
+        self.page = f"{DOMAIN}/contact"
+        self.title = f"CONTACT | {TITLE}"
         self.customer_data = customer_data
 
-    @allure.step('Open CONTACT page')
+    @allure.step("Open CONTACT page")
     def open(self):
         self.driver.get(self.page)
 
