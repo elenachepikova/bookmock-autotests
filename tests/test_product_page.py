@@ -1,15 +1,17 @@
 import allure
 
-from data import HARRY_POTTER_TITLE, HAPPINESS_TITLE
+from data import products
 from elements import Footer, NavigationPanel, SearchAndFilter
 from pages import HomePage, ShopPage, ProductPage
 
 
 @allure.suite("Product page")
 class TestProductPage:
-    path_twi = "untitled-product-1"
-    path_hp = "untitled-product-2"
-    path_sci = "untitled-product-3"
+    path_twi = products["Twilight"]["path"]
+    path_hp = products["Harry Potter"]["path"]
+    path_sci = products["Happiness"]["path"]
+    harry_potter = products["Harry Potter"]["title"]
+    happiness = products["Happiness"]["title"]
 
     @allure.title("Open Product page from 'Featured' section on HOME page")
     def test_open_product_page_from_home(self, driver):
@@ -21,7 +23,7 @@ class TestProductPage:
         search_sidebar.click_on_apply_button()
         homepage.click_on_product_link()
         product_page = ProductPage(driver)
-        product_page.assert_page_is_displayed(HARRY_POTTER_TITLE, self.path_hp)
+        product_page.assert_page_is_displayed(self.harry_potter, self.path_hp)
 
     @allure.title("Open Product page from 'All Products' section on SHOP page")
     def test_open_product_page_from_shop(self, driver):
@@ -30,7 +32,7 @@ class TestProductPage:
         shop_page.check_on_sale_checkbox()
         shop_page.click_on_product_link()
         product_page = ProductPage(driver)
-        product_page.assert_page_is_displayed(HAPPINESS_TITLE, self.path_sci)
+        product_page.assert_page_is_displayed(self.happiness, self.path_sci)
         header = NavigationPanel(driver)
         header.assert_header_is_displayed()
         footer = Footer(driver)

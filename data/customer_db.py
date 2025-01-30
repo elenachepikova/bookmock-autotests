@@ -5,7 +5,7 @@ import string
 
 class CustomerDB:
     def __init__(self):
-        self.db_path = './customers.db'
+        self.db_path = "./customers.db"
         self.connection = None
 
     def connect(self):
@@ -19,7 +19,7 @@ class CustomerDB:
 
     def create_database(self):
         """
-        This function creates an SQLIte database containing 'customers' table with columns:
+        This function creates an SQLIte database with 'customers' table with columns:
             - id (int):  Auto-incremented primary key
             - first_name (text): Customer first name
             - last_name (text): Customer last name
@@ -28,13 +28,15 @@ class CustomerDB:
         """
         self.connect()
 
-        self.connection.execute('''
+        self.connection.execute(
+            """
         CREATE TABLE IF NOT EXISTS customers(
             id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
             first_name TEXT NOT NULL,
             last_name TEXT NOT NULL,
             email TEXT NOT NULL,
-            message TEXT NOT NULL)''')
+            message TEXT NOT NULL)"""
+        )
 
         self.connection.commit()
 
@@ -54,11 +56,22 @@ class CustomerDB:
         name_length = random.randint(5, 10)
         message_length = random.randint(1, 256)
 
-        first_name = ''.join(random.choice(string.ascii_lowercase) for _ in range(name_length))
-        last_name = ''.join(random.choice(string.ascii_lowercase) for _ in range(name_length))
+        first_name = "".join(
+            random.choice(string.ascii_lowercase) for _ in range(name_length)
+        )
+        last_name = "".join(
+            random.choice(string.ascii_lowercase) for _ in range(name_length)
+        )
         email = first_name + "_" + last_name + domain
-        message = ''.join(random.choice(string.printable) for _ in range(message_length))
-        return first_name.capitalize(), last_name.capitalize(), email, message.capitalize()
+        message = "".join(
+            random.choice(string.printable) for _ in range(message_length)
+        )
+        return (
+            first_name.capitalize(),
+            last_name.capitalize(),
+            email,
+            message.capitalize(),
+        )
 
     def insert_customer(self, first_name, last_name, email, message):
         """
@@ -66,10 +79,13 @@ class CustomerDB:
         into customer DB created by create_database() function
         """
         self.connect()
-        self.connection.execute('''
+        self.connection.execute(
+            """
             INSERT INTO customers (first_name, last_name, email, message)
             VALUES (?,?,?,?)
-        ''', (first_name, last_name, email, message))
+        """,
+            (first_name, last_name, email, message),
+        )
         self.connection.commit()
 
     def count_rows_in_db(self):
@@ -90,7 +106,9 @@ class CustomerDB:
         self.connect()
         cursor = self.connection.cursor()
 
-        cursor.execute(f"SELECT first_name, last_name, email, message FROM customers WHERE id = {customer_id}")
+        cursor.execute(
+            f"SELECT first_name, last_name, email, message FROM customers WHERE id = {customer_id}"
+        )
         customer_data = cursor.fetchone()
 
         return customer_data

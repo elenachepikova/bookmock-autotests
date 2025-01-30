@@ -3,11 +3,14 @@ import pytest
 
 from elements import NavigationPanel, Footer, SortByDropdown
 from pages import ShopPage
-from data import HARRY_POTTER_TITLE, TWILIGHT_TITLE, HAPPINESS_TITLE
+from data import products
 
 
 @allure.suite("'SHOP' page")
 class TestShopPage:
+    harry_potter = products["Harry Potter"]["title"]
+    twilight = products["Twilight"]["title"]
+    happiness = products["Happiness"]["title"]
 
     @allure.title("Assert all expected elements are present on 'SHOP' page")
     def test_assert_shop_page_ui(self, driver):
@@ -20,10 +23,9 @@ class TestShopPage:
         footer = Footer(driver)
         footer.assert_footer_is_displayed()
 
-    @pytest.mark.parametrize("value, title",
-                             [("har", HARRY_POTTER_TITLE),
-                              ("twi", TWILIGHT_TITLE),
-                              ("sci", HAPPINESS_TITLE)])
+    @pytest.mark.parametrize(
+        "value, title", [("har", harry_potter), ("twi", twilight), ("sci", happiness)]
+    )
     @allure.title("Filter Featured section by product name Search")
     def test_search_by_name(self, driver, value, title):
         shop_page = ShopPage(driver)
@@ -38,14 +40,18 @@ class TestShopPage:
         shop_page.open()
         shop_page.apply_search_filter("gre")
         shop_page.assert_products_count(1)
-        shop_page.assert_first_book_title(HAPPINESS_TITLE)
+        shop_page.assert_first_book_title(self.happiness)
         shop_page.clear_search_filter()
         shop_page.assert_products_count(3)
 
-    @pytest.mark.parametrize("check_checkbox, value, title",
-                             [(lambda shop_page: shop_page.check_featured_checkbox(), 2, TWILIGHT_TITLE),
-                              (lambda shop_page: shop_page.check_on_sale_checkbox(), 1, HAPPINESS_TITLE),
-                              (lambda shop_page: shop_page.check_in_stock_checkbox(), 3, TWILIGHT_TITLE)])
+    @pytest.mark.parametrize(
+        "check_checkbox, value, title",
+        [
+            (lambda shop_page: shop_page.check_featured_checkbox(), 2, twilight),
+            (lambda shop_page: shop_page.check_on_sale_checkbox(), 1, happiness),
+            (lambda shop_page: shop_page.check_in_stock_checkbox(), 3, twilight),
+        ],
+    )
     @allure.title("Filter ALL products by 'Browse By' filter")
     def test_filter_by_browse_by(self, driver, check_checkbox, value, title):
         shop_page = ShopPage(driver)
@@ -55,10 +61,14 @@ class TestShopPage:
         shop_page.assert_products_count(value)
         shop_page.assert_first_book_title(title)
 
-    @pytest.mark.parametrize("check_checkbox, value, title",
-                             [(lambda shop_page: shop_page.check_fiction_checkbox(), 2, TWILIGHT_TITLE),
-                              (lambda shop_page: shop_page.check_non_fiction_checkbox(), 1, HAPPINESS_TITLE),
-                              (lambda shop_page: shop_page.check_popular_checkbox(), 1, HARRY_POTTER_TITLE)])
+    @pytest.mark.parametrize(
+        "check_checkbox, value, title",
+        [
+            (lambda shop_page: shop_page.check_fiction_checkbox(), 2, twilight),
+            (lambda shop_page: shop_page.check_non_fiction_checkbox(), 1, happiness),
+            (lambda shop_page: shop_page.check_popular_checkbox(), 1, harry_potter),
+        ],
+    )
     @allure.title("Filter ALL products by 'Collections' filter")
     def test_filter_by_collections(self, driver, check_checkbox, value, title):
         shop_page = ShopPage(driver)
@@ -68,10 +78,10 @@ class TestShopPage:
         shop_page.assert_products_count(value)
         shop_page.assert_first_book_title(title)
 
-    @pytest.mark.parametrize("price_min, price_max, title",
-                             [(8, 10, HAPPINESS_TITLE),
-                              (10, 20, HARRY_POTTER_TITLE),
-                              (20, 100, TWILIGHT_TITLE)])
+    @pytest.mark.parametrize(
+        "price_min, price_max, title",
+        [(8, 10, happiness), (10, 20, harry_potter), (20, 100, twilight)],
+    )
     @allure.title("Filter ALL products by Price")
     def test_filter_by_price(self, driver, price_min, price_max, title):
         shop_page = ShopPage(driver)
@@ -82,7 +92,7 @@ class TestShopPage:
         shop_page.assert_products_count(1)
         shop_page.assert_first_book_title(title)
 
-    @allure.title("No products found message is displayed on 'SHOP' page if search is unsuccessful")
+    @allure.title("No products found message if search is unsuccessful")
     def test_no_matches_found(self, driver):
         shop_page = ShopPage(driver)
         shop_page.open()
@@ -91,12 +101,16 @@ class TestShopPage:
         shop_page.check_non_fiction_checkbox()
         shop_page.assert_no_results_found_message()
 
-    @pytest.mark.parametrize("dropdown_option, title",
-                             [(lambda dropdown: dropdown.sort_by_recently_added(), TWILIGHT_TITLE),
-                              (lambda dropdown: dropdown.sort_by_price_low_high(), HAPPINESS_TITLE),
-                              (lambda dropdown: dropdown.sort_by_price_high_low(), TWILIGHT_TITLE),
-                              (lambda dropdown: dropdown.sort_by_name_a_z(), HARRY_POTTER_TITLE),
-                              (lambda dropdown: dropdown.sort_by_name_z_a(), TWILIGHT_TITLE)])
+    @pytest.mark.parametrize(
+        "dropdown_option, title",
+        [
+            (lambda dropdown: dropdown.sort_by_recently_added(), twilight),
+            (lambda dropdown: dropdown.sort_by_price_low_high(), happiness),
+            (lambda dropdown: dropdown.sort_by_price_high_low(), twilight),
+            (lambda dropdown: dropdown.sort_by_name_a_z(), harry_potter),
+            (lambda dropdown: dropdown.sort_by_name_z_a(), twilight),
+        ],
+    )
     @allure.title("Sort Featured section items with 'Sort By' drop-down")
     def test_sort_all_products(self, driver, dropdown_option, title):
         shop_page = ShopPage(driver)
