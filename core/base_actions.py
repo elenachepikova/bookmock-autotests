@@ -30,7 +30,7 @@ class BaseActions:
         invisibility = WebDriverWait(self.driver, 10).until(
             EC.invisibility_of_element_located(selector)
         )
-        assert invisibility == True, f"Element {selector} is visible"
+        assert invisibility is True, f"Element {selector} is visible"
 
     @allure.step("Click_on {selector}")
     def click_on(self, selector, force=False):
