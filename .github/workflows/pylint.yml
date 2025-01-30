@@ -1,4 +1,4 @@
-name: Lint Python Code
+name: Run Flake8
 on:
   push:
     branches:
@@ -9,7 +9,7 @@ on:
 
 jobs:
   flake8:
-    runs-on: python:3-alpine
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
@@ -18,8 +18,7 @@ jobs:
     - name: Install dependencies
       run: |
         python3 -m pip install --upgrade pip
-        python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Run Flake8
       run: |
-        flake8 .
+        flake8 --config=setup.cfg
