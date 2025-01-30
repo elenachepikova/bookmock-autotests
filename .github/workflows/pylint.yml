@@ -17,8 +17,6 @@ jobs:
 
     - name: Install dependencies
       run: |
-        apt update
-        apt upgrade -y
         apt install python 3.12.6
         python3 -m pip install --upgrade pip
         pip install -r requirements.txt
