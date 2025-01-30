@@ -35,9 +35,9 @@ class ContactPage(Assertions):
 
     @allure.step('Assert "CONTACT" page elements are present')
     def assert_sections_are_present(self):
-        self.assert_element_is_visible(self.CONTACT_US_BANNER), 'CONTACT_US_BANNER not displayed'
-        self.assert_element_is_visible(self.CONTACT_US_SECTION), 'CONTACT_US_SECTION not displayed'
-        self.assert_element_is_visible(self.FIND_US_SECTION), 'FIND_US_SECTION not displayed'
+        self.assert_element_is_visible(self.CONTACT_US_BANNER)
+        self.assert_element_is_visible(self.CONTACT_US_SECTION)
+        self.assert_element_is_visible(self.FIND_US_SECTION)
 
     @allure.step('Fill in "First Name" field')
     def fill_in_first_name_field(self):

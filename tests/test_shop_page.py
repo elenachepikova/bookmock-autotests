@@ -85,7 +85,7 @@ class TestShopPage:
         shop_page.assert_products_count(1)
         shop_page.assert_first_book_title(title)
 
-    @allure.title("No products found message is displayed on 'SHOP' page if search is unsuccessful")
+    @allure.title("No products found message if search is unsuccessful")
     def test_no_matches_found(self, driver):
         shop_page = ShopPage(driver)
         shop_page.open()

@@ -6,12 +6,12 @@ from elements import SearchAndFilter
 from pages import HomePage
 
 
-@allure.suite("'Search and Filter' sidebar for Featured section on 'Home' page")
+@allure.suite("'Search and Filter' sidebar on 'Home' page")
 class TestSearchAndFilterSidebar:
     harry_potter = products["Harry Potter"]["title"]
     twilight = products["Twilight"]["title"]
 
-    @allure.title("'Search and Filter' sidebar is opened by click on 'Search and Filter' button")
+    @allure.title("Open 'Search and Filter' sidebar")
     def test_open_search_and_filter_sidebar(self, driver):
         homepage = HomePage(driver)
         homepage.open()
@@ -35,7 +35,7 @@ class TestSearchAndFilterSidebar:
         homepage.assert_products_count(1)
         homepage.assert_first_book_title(title)
 
-    @allure.title("Clear search by product name on 'Search and Filter' sidebar")
+    @allure.title("Clear product name search on 'Search and Filter' sidebar")
     def test_clear_search_filter(self, driver):
         homepage = HomePage(driver)
         homepage.open()
@@ -72,7 +72,7 @@ class TestSearchAndFilterSidebar:
         search_sidebar.click_on_apply_button()
         homepage.assert_products_count(2)
 
-    @allure.title("Filter Featured products by Fiction and Popular collections")
+    @allure.title("Filter Featured products by all collections")
     def test_filter_by_collections(self, driver):
         homepage = HomePage(driver)
         homepage.open()
@@ -113,7 +113,7 @@ class TestSearchAndFilterSidebar:
         homepage.assert_products_count(1)
         homepage.assert_first_book_title(title)
 
-    @allure.title("No products found message is displayed if search is unsuccessful")
+    @allure.title("No products found message if search is unsuccessful")
     def test_no_matches_found(self, driver):
         homepage = HomePage(driver)
         homepage.open()

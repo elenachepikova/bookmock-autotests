@@ -39,5 +39,5 @@ class ProductPage(ProductActions):
 
     @allure.step('Assert Product page UI')
     def assert_product_page_ui(self):
-        self.assert_element_is_visible(self.NAVIGATION_SECTION), 'NAVIGATION_SECTION not displayed'
+        self.assert_element_is_visible(self.NAVIGATION_SECTION)
         self.assert_product_elements()

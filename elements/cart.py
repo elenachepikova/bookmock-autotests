@@ -64,12 +64,6 @@ class Cart(Assertions):
     def assert_product_price(self, value):
         self.assert_text(self.PRODUCT_PRICE, value)
 
-    @staticmethod
-    def find_price_by_title(title):
-        for product_key, product_info in products.items():
-            if product_info["title"] == title:
-                return float(product_info["price"])
-
     @allure.step('Update quantity value for product in cart')
     def set_quantity(self, value: str):
         self.select_dropdown_option(self.QUANTITY_SELECTOR, value)
@@ -99,3 +93,9 @@ class Cart(Assertions):
         element = self.wait_for_element(dynamic_selector)
         value = element.get_attribute("data-current")
         return value
+
+    @staticmethod
+    def find_price_by_title(title):
+        for product_key, product_info in products.items():
+            if product_info["title"] == title:
+                return float(product_info["price"])

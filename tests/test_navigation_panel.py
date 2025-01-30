@@ -44,7 +44,7 @@ class TestNavigationPanel:
         contact_page.assert_page_is_displayed()
 
     @allure.title("Open 'HOME' page via navigation panel")
-    def test_open_contact_page_via_nav_panel(self, driver):
+    def test_open_home_page_via_nav_panel(self, driver):
         contact_page = ContactPage(driver)
         contact_page.open()
         panel = NavigationPanel(driver)
@@ -52,7 +52,7 @@ class TestNavigationPanel:
         homepage = HomePage(driver)
         homepage.assert_page_is_displayed()
 
-    @allure.title("Site logo click on navigation panel redirects to 'HOME' page")
+    @allure.title("Click on site logo redirects to 'HOME' page")
     def test_click_on_logo_in_nav_panel(self, driver):
         faq_page = FAQPage(driver)
         faq_page.open()
@@ -61,7 +61,7 @@ class TestNavigationPanel:
         homepage = HomePage(driver)
         homepage.assert_page_is_displayed()
 
-    @allure.title("'SHOP NOW' button on navigation panel redirects to 'SHOP' page")
+    @allure.title("'SHOP NOW' button redirects to 'SHOP' page")
     def test_click_on_show_now_button_in_nav_panel(self, driver):
         homepage = HomePage(driver)
         homepage.open()
@@ -70,7 +70,7 @@ class TestNavigationPanel:
         shop_page = ShopPage(driver)
         shop_page.assert_page_is_displayed()
 
-    @allure.title("'CART' icon on navigation panel opens Cart sidebar")
+    @allure.title("'CART' icon opens Cart sidebar")
     def test_open_empty_cart(self, driver):
         homepage = HomePage(driver)
         homepage.open()

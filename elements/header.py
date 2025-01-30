@@ -20,15 +20,15 @@ class NavigationPanel(Assertions):
 
     @allure.step('Assert header navigation panel items presence')
     def assert_header_is_displayed(self):
-        self.assert_element_is_visible(self.HEADER), f"HEADER not displayed"
-        self.assert_element_is_visible(self.LOGO), f"LOGO icon not displayed"
-        self.assert_element_is_visible(self.HOME), f"HOME button not displayed"
-        self.assert_element_is_visible(self.ABOUT), f"ABOUT button not displayed"
-        self.assert_element_is_visible(self.SHOP), f"SHOP button not displayed"
-        self.assert_element_is_visible(self.FAQ), f"FAQ button not displayed"
-        self.assert_element_is_visible(self.CONTACT), f"CONTACT button not displayed"
-        self.assert_element_is_visible(self.SHOP_NOW), f"SHOP_NOW button not displayed"
-        self.assert_element_is_visible(self.CART), f"CART icon not displayed"
+        self.assert_element_is_visible(self.HEADER)
+        self.assert_element_is_visible(self.LOGO)
+        self.assert_element_is_visible(self.HOME)
+        self.assert_element_is_visible(self.ABOUT)
+        self.assert_element_is_visible(self.SHOP)
+        self.assert_element_is_visible(self.FAQ)
+        self.assert_element_is_visible(self.CONTACT)
+        self.assert_element_is_visible(self.SHOP_NOW)
+        self.assert_element_is_visible(self.CART)
 
     @allure.step('Click on logo icon in navigation panel')
     def click_on_logo(self):
