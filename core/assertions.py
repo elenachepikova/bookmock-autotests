@@ -21,7 +21,7 @@ class Assertions(BaseActions):
         assert len(elements) == 0, f"Unexpected element(s) {selector} present on page"
 
     @allure.step("Assert page title and URL")
-    def assert_page_title_and_url(self, title, url):
+    def assert_page_title_and_url(self, title=None, url=None):
         if title is not None:
             assert self.driver.title == title, (
                 f"Title should be {title}, " f"but is {self.driver.title}"
@@ -37,6 +37,11 @@ class Assertions(BaseActions):
         assert element.text == text, (
             f"Expected text: {text}, " f"actual: {element.text}"
         )
+
+    @allure.step("Assert {selector} label contains text {text}")
+    def assert_label(self, selector, text):
+        actual_text = self.get_label(selector)
+        assert actual_text == text, f"Expected text: {text}, " f"actual: {actual_text}"
 
     @allure.step("Assert page main banner contains text {text}")
     def assert_banner_title(self, text):

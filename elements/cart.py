@@ -74,6 +74,10 @@ class Cart(Assertions):
     def click_on_continue_shopping_button(self):
         self.click_on(self.CONTINUE_SHOPPING_BUTTON)
 
+    @allure.step('Click on "Checkout" button')
+    def click_on_checkout_button(self):
+        self.click_on(self.CHECKOUT_BUTTON)
+
     @allure.step("Assert total price of all items in cart")
     def assert_cart_total(self):
         items_count = self.count_elements(self.PRODUCT_NAME)
