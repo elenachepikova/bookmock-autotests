@@ -17,7 +17,7 @@ class Cart(Assertions):
     CART_TOTAL = (By.CSS_SELECTOR, ".bb-cart-subtotal")
     CHECKOUT_BUTTON = (By.CSS_SELECTOR, "button.bb-cart-checkout-btn")
     CONTINUE_SHOPPING_BUTTON_E = (By.CSS_SELECTOR, "button.btn.mt-4")
-    CONTINUE_SHOPPING_BUTTON_F = (By.CSS_SELECTOR, "button.bb-cart-continue-btn")
+    CONTINUE_SHOPPING_BUTTON = (By.CSS_SELECTOR, "button.bb-cart-continue-btn")
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -37,7 +37,7 @@ class Cart(Assertions):
 
     @allure.step("Assert Cart sidebar is not displayed")
     def assert_cart_is_not_displayed(self):
-        self.wait_for_element_invisibility(self.CART), "Cart sidebar is still visible!"
+        self.wait_for_element_invisibility(self.CART), "Cart is still visible!"
 
     @allure.step("Close Cart sidebar by click on close icon")
     def click_on_close_icon(self):
@@ -49,7 +49,7 @@ class Cart(Assertions):
         self.assert_element_is_visible(self.CART_ITEMS)
         self.assert_element_is_visible(self.CART_TOTAL)
         self.assert_element_is_visible(self.CHECKOUT_BUTTON)
-        self.assert_element_is_visible(self.CONTINUE_SHOPPING_BUTTON_F)
+        self.assert_element_is_visible(self.CONTINUE_SHOPPING_BUTTON)
 
     @allure.step("Assert cart items count is {value}")
     def assert_cart_items_count(self, value):
@@ -72,7 +72,7 @@ class Cart(Assertions):
 
     @allure.step('Click on "Continue Shopping" button')
     def click_on_continue_shopping_button(self):
-        self.click_on(self.CONTINUE_SHOPPING_BUTTON_F)
+        self.click_on(self.CONTINUE_SHOPPING_BUTTON)
 
     @allure.step("Assert total price of all items in cart")
     def assert_cart_total(self):

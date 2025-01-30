@@ -15,7 +15,8 @@ class Footer(Assertions):
     MESSAGE = (By.CSS_SELECTOR, ".px-2.mb-3")
     address_text = "ul. Starowiślna 17/2, 31-038 Kraków"
     email_text = "ec.estest01@gmail.com"
-    message_text = "This site is created for testing purposes and can be used only by the site owner"
+    message_text = ("This site is created for testing purposes "
+                    "and can be used only by the site owner")
 
     def __init__(self, driver):
         super().__init__(driver)

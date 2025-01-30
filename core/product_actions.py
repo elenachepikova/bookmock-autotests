@@ -26,8 +26,12 @@ class ProductActions(CommonActions):
         self.assert_element_is_visible(self.ADD_TO_CART_BUTTON)
         self.assert_element_is_visible(self.DESCRIPTION_SECTION)
         self.assert_element_is_visible(self.PRODUCT_PREVIEW)
-        assert self.get_label(self.DESCRIPTION_SECTION) == "Description", "DESCRIPTION title is not 'Description'"
-        assert self.get_label(self.ADD_TO_CART_BUTTON) == "Add to Cart", "Invalid name of 'Add to Cart' button"
+        assert (
+            self.get_label(self.DESCRIPTION_SECTION) == "Description"
+        ), "DESCRIPTION title is not 'Description'"
+        assert (
+            self.get_label(self.ADD_TO_CART_BUTTON) == "Add to Cart"
+        ), "Invalid name of 'Add to Cart' button"
         self.assert_value(self.QUANTITY_FIELD, "1")
 
     @allure.step("Assert original price is present for discounted product")

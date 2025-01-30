@@ -48,10 +48,18 @@ class ShopPage(CommonActions):
         self.assert_element_is_visible(self.COLLECTIONS_SECTION)
         self.assert_element_is_visible(self.PRICE_SECTION)
         self.assert_element_is_visible(self.SORT_BY_DROPDOWN)
-        assert self.get_label(self.SEARCH_SECTION) == "Search", "SEARCH_SECTION title is not 'Search'"
-        assert self.get_label(self.BROWSE_BY_SECTION) == "Browse By", "BROWSE_BY_SECTION title is not 'Browse By'"
-        assert self.get_label(self.COLLECTIONS_SECTION) == "Collections:", "COLLECTIONS title is not 'Collections:'"
-        assert self.get_label(self.PRICE_SECTION) == "Price ($):", "PRICE_SECTION title is not 'Price ($):'"
+        assert (
+            self.get_label(self.SEARCH_SECTION) == "Search"
+        ), "SEARCH_SECTION title is not 'Search'"
+        assert (
+            self.get_label(self.BROWSE_BY_SECTION) == "Browse By"
+        ), "BROWSE_BY_SECTION title is not 'Browse By'"
+        assert (
+            self.get_label(self.COLLECTIONS_SECTION) == "Collections:"
+        ), "COLLECTIONS title is not 'Collections:'"
+        assert (
+            self.get_label(self.PRICE_SECTION) == "Price ($):"
+        ), "PRICE_SECTION title is not 'Price ($):'"
         self.assert_value(self.PRICE_MIN_FIELD, "9")
         self.assert_value(self.PRICE_MAX_FIELD, "25")
 

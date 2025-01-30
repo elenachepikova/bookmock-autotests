@@ -19,7 +19,7 @@ class CustomerDB:
 
     def create_database(self):
         """
-        This function creates an SQLIte database containing 'customers' table with columns:
+        This function creates an SQLIte database with 'customers' table with columns:
             - id (int):  Auto-incremented primary key
             - first_name (text): Customer first name
             - last_name (text): Customer last name
