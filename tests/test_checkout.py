@@ -8,7 +8,7 @@ from pages import HomePage, ShopPage, ProductPage, CheckoutPage
 class TestCheckout:
 
     @allure.title("Go through checkout process")
-    def test_place_order(self, driver):
+    def test_place_order(self, driver, customer_db):
         homepage = HomePage(driver)
         homepage.open()
         header = NavigationPanel(driver)
@@ -19,7 +19,7 @@ class TestCheckout:
         product_page.click_on_add_to_cart_button()
         cart = Cart(driver)
         cart.click_on_checkout_button()
-        checkout = CheckoutPage(driver)
+        checkout = CheckoutPage(driver, customer_db)
         checkout.assert_customer_info_step_opened()
         checkout.fill_in_checkout_form()
         checkout.assert_shipping_details_step_opened()
