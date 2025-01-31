@@ -1,10 +1,12 @@
 import allure
+import pytest
 
 from data import products
 from elements import SearchAndFilter, ProductModal
 from pages import HomePage, ShopPage
 
 
+@pytest.mark.ui
 @allure.suite("Product modal")
 class TestProductModal:
     harry_potter = products["Harry Potter"]["title"]

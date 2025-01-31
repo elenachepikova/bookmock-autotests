@@ -1,10 +1,12 @@
 import allure
+import pytest
 
 from data import products
 from elements import Cart, NavigationPanel, SearchAndFilter, ProductModal
 from pages import HomePage, ShopPage, ProductPage
 
 
+@pytest.mark.ui
 @allure.suite("'Cart' sidebar")
 class TestCart:
     twilight = products["Twilight"]

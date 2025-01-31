@@ -6,6 +6,7 @@ from elements import SearchAndFilter
 from pages import HomePage
 
 
+@pytest.mark.ui
 @allure.suite("'Search and Filter' sidebar on 'Home' page")
 class TestSearchAndFilterSidebar:
     harry_potter = products["Harry Potter"]["title"]

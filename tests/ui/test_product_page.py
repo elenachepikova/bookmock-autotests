@@ -1,10 +1,12 @@
 import allure
+import pytest
 
 from data import products
 from elements import Footer, NavigationPanel, SearchAndFilter
 from pages import HomePage, ShopPage, ProductPage
 
 
+@pytest.mark.ui
 @allure.suite("Product page")
 class TestProductPage:
     path_twi = products["Twilight"]["path"]

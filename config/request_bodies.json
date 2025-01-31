@@ -1,0 +1,179 @@
+{
+  "add_pet_with_required_parameters": {
+    "id": 123456790,
+    "name": "dog_test",
+    "photoUrls": [
+      "string"
+    ]
+  },
+  "add_available_pet_with_all_parameters": {
+    "id": 123456792,
+    "category": {
+      "id": 123456792,
+      "name": "string"
+    },
+    "name": "dog_test_available",
+    "photoUrls": [
+      "string"
+    ],
+    "tags": [
+      {
+        "id": 123456792,
+        "name": "string"
+      }
+    ],
+    "status": "available"
+  },
+  "add_pending_pet_with_all_parameters": {
+    "id": 123456793,
+    "category": {
+      "id": 123456793,
+      "name": "string"
+    },
+    "name": "dog_test_pending",
+    "photoUrls": [
+      "string"
+    ],
+    "tags": [
+      {
+        "id": 123456793,
+        "name": "string"
+      }
+    ],
+    "status": "pending"
+  },
+  "add_sold_pet_with_all_parameters": {
+    "id": 123456794,
+    "category": {
+      "id": 123456794,
+      "name": "string"
+    },
+    "name": "dog_test_pending",
+    "photoUrls": [
+      "string"
+    ],
+    "tags": [
+      {
+        "id": 123456794,
+        "name": "string"
+      }
+    ],
+    "status": "sold"
+  },
+  "add_pet_with_invalid_parameters": {
+    "id": 123456795,
+    "category": {
+      "id": "string",
+      "name": "string"
+    },
+    "name": 3,
+    "photoUrls": [
+      "string"
+    ],
+    "tags": [
+      {
+        "id": 0,
+        "name": "string"
+      }
+    ],
+    "status": "sold"
+  },
+  "place_order_for_purchasing_pet": {
+    "id": 1234567999,
+    "petId": 1234567999,
+    "quantity": 1,
+    "shipDate": "2024-12-17T14:02:21.349Z",
+    "status": "placed",
+    "complete": true
+  },
+  "add_single_user": [
+    {
+      "id": 99526311112,
+      "username": "cwl001test",
+      "firstName": "Harry",
+      "lastName": "Potter",
+      "email": "harry_potter@gmail.com",
+      "password": "Harry_potter_forever123/*@",
+      "phone": "777555333",
+      "userStatus": 0
+    }
+  ],
+  "add_list_of_users": [
+    {
+      "id": 99526311113,
+      "username": "cwl002test",
+      "firstName": "Hermione",
+      "lastName": "Granger",
+      "email": "hermione_granger@gmail.com",
+      "password": "Harry_potter_forever123/*@",
+      "phone": "777555111",
+      "userStatus": 0
+    },
+    {
+      "id": 99526311114,
+      "username": "cwl003test",
+      "firstName": "Ron",
+      "lastName": "Weasley",
+      "email": "ron_weasley@gmail.com",
+      "password": "Harry_potter_forever123/*@",
+      "phone": "777555000",
+      "userStatus": 0
+    },
+    {
+      "id": 99526311115,
+      "username": "cwl004test",
+      "firstName": "Lord",
+      "lastName": "Voldemort",
+      "email": "lord_voldemort@gmail.com",
+      "password": "Harry_potter_forever123/*@",
+      "phone": "777555222",
+      "userStatus": 0
+    }
+  ],
+  "update_single_user": {
+    "id": 99526311112,
+    "username": "cwl001test",
+    "firstName": "Albus",
+    "lastName": "Dumbledore",
+    "email": "albus_dumbledore@gmail.com",
+    "password": "Harry_potter_forever123/*@",
+    "phone": "777555777",
+    "userStatus": 0
+  },
+  "duplicated_usernames": [
+    {
+      "id": 995263111199,
+      "username": "cwl005test",
+      "firstName": "Duplicate1",
+      "lastName": "Duplicate1",
+      "email": "duplicate1@gmail.com",
+      "password": "Harry_potter_forever123/*@",
+      "phone": "777555ddd",
+      "userStatus": 0
+    },
+    {
+      "id": 995263111198,
+      "username": "cwl005test",
+      "firstName": "Duplicate2",
+      "lastName": "Duplicate2",
+      "email": "duplicate2@gmail.com",
+      "password": "Harry_potter_forever123/*@",
+      "phone": "777555bbb",
+      "userStatus": 0
+    }
+  ],
+  "empty_list": [
+  ],
+  "incorrect_body": [
+    {
+      "id": 99526311112,
+      "username": 123,
+      "firstName": "Harry",
+      "lastName": "Potter",
+      "email": "harry_potter@gmail.com",
+      "password": "Harry_potter_forever123/*@",
+      "phone": "777555333",
+      "userStatus": 0
+    }
+  ]
+}

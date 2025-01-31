@@ -1,8 +1,10 @@
 import allure
+import pytest
 
 from pages import AboutPage, ContactPage, ShopPage
 
 
+@pytest.mark.ui
 @allure.suite("'ABOUT' page")
 class TestAboutPage:
 
