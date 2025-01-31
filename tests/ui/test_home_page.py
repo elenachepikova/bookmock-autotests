@@ -6,6 +6,7 @@ from elements import Footer, NavigationPanel, SortByDropdown
 from pages import HomePage, ShopPage
 
 
+@pytest.mark.ui
 @allure.suite("'HOME' page")
 class TestHomePage:
     harry_potter = products["Harry Potter"]["title"]

@@ -5,6 +5,7 @@ from elements import Footer, NavigationPanel
 from pages import ContactPage, FormSubmittedPage
 
 
+@pytest.mark.ui
 @allure.suite("'CONTACT' page")
 class TestContactPage:
 

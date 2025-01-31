@@ -1,9 +1,11 @@
 import allure
+import pytest
 
 from elements import Cart, NavigationPanel
 from pages import HomePage, ShopPage, ProductPage, CheckoutPage
 
 
+@pytest.mark.ui
 @allure.suite("Checkout steps")
 class TestCheckout:
 

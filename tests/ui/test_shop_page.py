@@ -6,6 +6,7 @@ from pages import ShopPage
 from data import products
 
 
+@pytest.mark.ui
 @allure.suite("'SHOP' page")
 class TestShopPage:
     harry_potter = products["Harry Potter"]["title"]

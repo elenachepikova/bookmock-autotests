@@ -1,9 +1,11 @@
 import allure
+import pytest
 
 from elements import NavigationPanel, Cart
 from pages import AboutPage, ContactPage, HomePage, ShopPage, FAQPage
 
 
+@pytest.mark.ui
 @allure.suite("Navigation panel")
 class TestNavigationPanel:
 

@@ -1,20 +1,28 @@
 import allure
 import pytest
 
-from core import assert_user_list_created_response, assert_response_full, assert_response_code, load_json_config
+from core import (
+    assert_user_list_created_response,
+    assert_response_full,
+    assert_response_code,
+    load_json_config,
+)
 
 
+@pytest.mark.api
 @allure.suite("Tests for user service")
 @allure.sub_suite("POST")
 class TestCreateUsersFromList:
-    body_config = load_json_config('config/request_bodies.json')
+    body_config = load_json_config("config/request_bodies.json")
     single_user = body_config["add_single_user"]
     multiple_users = body_config["add_list_of_users"]
     duplicates = body_config["duplicated_usernames"]
     empty_list = body_config["empty_list"]
     incorrect_body = body_config["incorrect_body"]
 
-    @allure.title("New user can be successfully created using POST /user/createWithList endpoint")
+    @allure.title(
+        "New user can be successfully created using POST /user/createWithList endpoint"
+    )
     def test_add_single_user_via_list(self, cleanup_user, user_service):
         """
         Tests new single user creation via /user/createWithList endpoint:
@@ -30,9 +38,13 @@ class TestCreateUsersFromList:
         username = self.single_user[0]["username"]
         cleanup_user.append(username)
 
-        user_service.get_user_and_assert(username, self.single_user, assert_response_full)
+        user_service.get_user_and_assert(
+            username, self.single_user, assert_response_full
+        )
 
-    @allure.title("New users can be successfully created using POST /user/createWithList endpoint")
+    @allure.title(
+        "New users can be successfully created using POST /user/createWithList endpoint"
+    )
     def test_add_multiple_users_via_list(self, cleanup_user, user_service):
         """
         Tests multiple users creation via /user/createWithList endpoint:

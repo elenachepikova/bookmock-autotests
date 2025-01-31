@@ -3,22 +3,32 @@ from typing import Dict
 import allure
 import pytest
 
-from core import assert_response_min, assert_response_full, assert_response_code, load_json_config
+from core import (
+    assert_response_min,
+    assert_response_full,
+    assert_response_code,
+    load_json_config,
+)
 
 
+@pytest.mark.api
 @allure.suite("Tests for pet service")
 @allure.sub_suite("POST")
 class TestAddPetPost:
-    body_config = load_json_config('config/request_bodies.json')
+    body_config = load_json_config("config/request_bodies.json")
     req = body_config["add_pet_with_required_parameters"]
     available = body_config["add_available_pet_with_all_parameters"]
     pending = body_config["add_pending_pet_with_all_parameters"]
     sold = body_config["add_sold_pet_with_all_parameters"]
 
     @allure.title("New pet can be successfully added using POST /pet endpoint")
-    @pytest.mark.parametrize("body_req, assertion", [(req, assert_response_min),
-                                                     (available, assert_response_full)])
-    def test_add_pet_with_different_params_set(self, cleanup_pet, pet_service, body_req: Dict[str, str], assertion):
+    @pytest.mark.parametrize(
+        "body_req, assertion",
+        [(req, assert_response_min), (available, assert_response_full)],
+    )
+    def test_add_pet_with_different_params_set(
+        self, cleanup_pet, pet_service, body_req: Dict[str, str], assertion
+    ):
         """
         Tests new pet creation:
         - create new pet with required parameters only
@@ -33,11 +43,16 @@ class TestAddPetPost:
         pet_service.add_pet_and_assert(body_req, assertion)
         pet_service.get_pet_and_assert(pet_id, body_req, assertion)
 
-    @allure.title("New pet with different parameters can be successfully added using POST /pet endpoint")
-    @pytest.mark.parametrize("body_req, status", [(available, "available"),
-                                                  (pending, "pending"),
-                                                  (sold, "sold")])
-    def test_add_pet_with_different_statuses(self, cleanup_pet, pet_service, body_req, status):
+    @allure.title(
+        "New pet with different parameters can be successfully added using POST /pet endpoint"
+    )
+    @pytest.mark.parametrize(
+        "body_req, status",
+        [(available, "available"), (pending, "pending"), (sold, "sold")],
+    )
+    def test_add_pet_with_different_statuses(
+        self, cleanup_pet, pet_service, body_req, status
+    ):
         """
         Tests:
         - new pet creation with different statuses (available, pending, sold)
