@@ -32,7 +32,8 @@ class HomePage(CommonActions):
         self.assert_banner_title(self.BANNER_NAME)
 
     @allure.step('Assert "HOME" page elements are present')
-    def assert_sections_are_present(self):
+    def assert_home_page_ui(self):
+        self.assert_page_is_displayed()
         self.assert_element_is_visible(self.BANNER)
         self.assert_element_is_visible(self.FEATURED_SECTION)
         self.assert_element_is_visible(self.RECENT_REVIEWS)
