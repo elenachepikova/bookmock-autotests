@@ -5,7 +5,7 @@ from elements import NavigationPanel, Cart
 from pages import AboutPage, ContactPage, HomePage, ShopPage, FAQPage
 
 
-@pytest.mark.ui
+@pytest.mark.functional
 @allure.suite("Navigation panel")
 class TestNavigationPanel:
 

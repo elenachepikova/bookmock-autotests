@@ -6,7 +6,7 @@ from elements import Cart, NavigationPanel, SearchAndFilter, ProductModal
 from pages import HomePage, ShopPage, ProductPage
 
 
-@pytest.mark.ui
+@pytest.mark.functional
 @allure.suite("'Cart' sidebar")
 class TestCart:
     twilight = products["Twilight"]

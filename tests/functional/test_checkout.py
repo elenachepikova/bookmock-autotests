@@ -5,7 +5,7 @@ from elements import Cart, NavigationPanel
 from pages import HomePage, ShopPage, ProductPage, CheckoutPage
 
 
-@pytest.mark.ui
+@pytest.mark.functional
 @allure.suite("Checkout steps")
 class TestCheckout:
 
