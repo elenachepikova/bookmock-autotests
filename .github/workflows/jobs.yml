@@ -1,4 +1,4 @@
-name: Run Flake8
+name: CI/CD tests
 on:
   push:
     branches:
@@ -22,3 +22,21 @@ jobs:
     - name: Run Flake8
       run: |
         flake8 --config=setup.cfg
+
+  integration:
+    needs: flake8
+    if: success()
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run API tests
+        run: |
+          python -m pytest -m api     
