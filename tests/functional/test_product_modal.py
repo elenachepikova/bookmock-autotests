@@ -6,7 +6,7 @@ from elements import SearchAndFilter, ProductModal
 from pages import HomePage, ShopPage
 
 
-@pytest.mark.ui
+@pytest.mark.functional
 @allure.suite("Product modal")
 class TestProductModal:
     harry_potter = products["Harry Potter"]["title"]

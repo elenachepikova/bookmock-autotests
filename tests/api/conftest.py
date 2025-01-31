@@ -5,8 +5,12 @@ import pytest
 from core.api.utils import load_json_config
 from services import PetService, StoreService, UserService
 
-current_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-body_config = load_json_config(os.path.join(current_dir, "config", "request_bodies.json"))
+current_dir = os.path.dirname(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+)
+body_config = load_json_config(
+    os.path.join(current_dir, "config", "request_bodies.json")
+)
 
 
 @pytest.fixture

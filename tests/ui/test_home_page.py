@@ -24,7 +24,7 @@ class TestHomePage:
         homepage.open()
         header = NavigationPanel(driver)
         header.assert_header_is_displayed()
-        homepage.assert_sections_are_present()
+        homepage.assert_home_page_ui()
         footer = Footer(driver)
         footer.assert_footer_is_displayed()
 

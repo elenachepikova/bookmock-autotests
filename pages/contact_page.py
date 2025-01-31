@@ -1,5 +1,3 @@
-import time
-
 import allure
 from selenium.webdriver.common.by import By
 
@@ -17,11 +15,10 @@ class ContactPage(Assertions):
     MESSAGE_FIELD = (By.XPATH, '//*[@name="Message"]')
     SUBMIT_BUTTON = (By.CSS_SELECTOR, 'button[type="submit"].btn.btn-primary')
 
-    def __init__(self, driver, customer_data=None):
+    def __init__(self, driver):
         super().__init__(driver)
         self.page = f"{DOMAIN}/contact"
         self.title = f"CONTACT | {TITLE}"
-        self.customer_data = customer_data
 
     @allure.step("Open CONTACT page")
     def open(self):
@@ -34,39 +31,12 @@ class ContactPage(Assertions):
         self.assert_banner_title("CONTACT US")
 
     @allure.step('Assert "CONTACT" page elements are present')
-    def assert_sections_are_present(self):
-        self.assert_element_is_visible(self.CONTACT_US_BANNER)
+    def assert_contact_page_ui(self):
+        self.assert_page_is_displayed()
         self.assert_element_is_visible(self.CONTACT_US_SECTION)
         self.assert_element_is_visible(self.FIND_US_SECTION)
-
-    @allure.step('Fill in "First Name" field')
-    def fill_in_first_name_field(self):
-        self.insert_text(self.customer_data[0], self.FIRST_NAME_FIELD)
-
-    @allure.step('Fill in "Last Name" field')
-    def fill_in_last_name_field(self):
-        self.insert_text(self.customer_data[1], self.LAST_NAME_FIELD)
-
-    @allure.step('Fill in "Email" field')
-    def fill_in_email_field(self):
-        self.insert_text(self.customer_data[2], self.EMAIL_FIELD)
-
-    @allure.step('Fill in "Message" field')
-    def fill_in_message_field(self):
-        self.insert_text(self.customer_data[3], self.MESSAGE_FIELD)
-
-    # DRAFT VERSION, METHOD NEEDS TO BE REWORKED
-    @allure.step('Fill in and submit "Contact Us" form')
-    def fill_in_contact_us_form(self):
-        self.click_on(self.SUBMIT_BUTTON)
-        time.sleep(10)
-        self.fill_in_first_name_field()
-        time.sleep(10)
-        self.fill_in_last_name_field()
-        time.sleep(10)
-        self.fill_in_email_field()
-        time.sleep(10)
-        self.fill_in_message_field()
-        time.sleep(10)
-        self.click_on(self.SUBMIT_BUTTON)
-        time.sleep(10)
+        self.assert_element_is_visible(self.FIRST_NAME_FIELD)
+        self.assert_element_is_visible(self.LAST_NAME_FIELD)
+        self.assert_element_is_visible(self.EMAIL_FIELD)
+        self.assert_element_is_visible(self.SUBMIT_BUTTON)
+        self.assert_element_is_visible(self.MESSAGE_FIELD)
