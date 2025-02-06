@@ -1,9 +1,9 @@
 import allure
 
-from core import BaseService, assert_response_code
+from core import APIAssertions
 
 
-class UserService(BaseService):
+class UserService(APIAssertions):
 
     def __init__(self, headers):
         super().__init__()
@@ -49,7 +49,7 @@ class UserService(BaseService):
     @allure.step("Get user by username and assert response code and body")
     def get_user_and_assert(self, username, body_req, assertion):
         response = self.get_user(username)
-        assert_response_code(response)
+        self.assert_response_code(response)
 
         user_data = response.json()
         assertion(user_data, body_req)
@@ -57,7 +57,31 @@ class UserService(BaseService):
     @allure.step("Update user by username and assert response code and body")
     def update_user_and_assert(self, username, body_req, assertion):
         response = self.update_user(body_req, username)
-        assert_response_code(response)
+        self.assert_response_code(response)
 
         user_data = response.json()
         assertion(user_data)
+
+    @allure.step("Assert response for 'Create list of users with given array' endpoint")
+    def assert_user_list_created_response(self, user_data):
+        assert (
+            user_data["code"] == 200
+        ), f"Expected 'code' == 200, Actual - {user_data["code"]}"
+        assert (
+            user_data["type"] == "unknown"
+        ), f"Expected 'type' == 'unknown', Actual - {user_data["type"]}"
+        assert (
+            user_data["message"] == "ok"
+        ), f"Expected 'message' == 'ok', Actual - {user_data["message"]}"
+
+    @allure.step("Assert response for 'Update user' endpoint")
+    def assert_user_updated_response(self, user_data, body_req):
+        assert (
+            user_data["code"] == 200
+        ), f"Expected 'code' == 200, Actual - {user_data["code"]}"
+        assert (
+            user_data["type"] == "unknown"
+        ), f"Expected 'type' == 'unknown', Actual - {user_data["type"]}"
+        assert user_data["message"] == str(
+            body_req["id"]
+        ), "Unexpected 'message' value, 'message' should be equal to user id"

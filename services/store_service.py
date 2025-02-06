@@ -1,9 +1,9 @@
 import allure
 
-from core import BaseService
+from core import APIAssertions
 
 
-class StoreService(BaseService):
+class StoreService(APIAssertions):
 
     def __init__(self, headers):
         super().__init__()

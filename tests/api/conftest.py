@@ -2,32 +2,32 @@ import os
 
 import pytest
 
-from core.api.utils import load_json_config
+from core import load_json_config
 from services import PetService, StoreService, UserService
 
 current_dir = os.path.dirname(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 )
 body_config = load_json_config(
-    os.path.join(current_dir, "config", "request_bodies.json")
+    os.path.join(current_dir, "data", "api", "request_bodies.json")
 )
 
 
 @pytest.fixture
 def pet_service():
-    headers = load_json_config("config/headers.json")["default"]
+    headers = load_json_config("data/api/headers.json")["default"]
     return PetService(headers)
 
 
 @pytest.fixture
 def store_service():
-    headers = load_json_config("config/headers.json")["default"]
+    headers = load_json_config("data/api/headers.json")["default"]
     return StoreService(headers)
 
 
 @pytest.fixture
 def user_service():
-    headers = load_json_config("config/headers.json")["default"]
+    headers = load_json_config("data/api/headers.json")["default"]
     return UserService(headers)
 
 

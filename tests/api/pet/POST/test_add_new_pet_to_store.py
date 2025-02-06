@@ -3,19 +3,14 @@ from typing import Dict
 import allure
 import pytest
 
-from core import (
-    assert_response_min,
-    assert_response_full,
-    assert_response_code,
-    load_json_config,
-)
+from core import load_json_config
 
 
 @pytest.mark.api
 @allure.suite("Tests for pet service")
 @allure.sub_suite("POST")
 class TestAddPetPost:
-    body_config = load_json_config("config/request_bodies.json")
+    body_config = load_json_config("data/api/request_bodies.json")
     req = body_config["add_pet_with_required_parameters"]
     available = body_config["add_available_pet_with_all_parameters"]
     pending = body_config["add_pending_pet_with_all_parameters"]
@@ -24,7 +19,7 @@ class TestAddPetPost:
     @allure.title("New pet can be successfully added using POST /pet endpoint")
     @pytest.mark.parametrize(
         "body_req, assertion",
-        [(req, assert_response_min), (available, assert_response_full)],
+        [(req, "assert_response_min"), (available, "assert_response_full")],
     )
     def test_add_pet_with_different_params_set(
         self, cleanup_pet, pet_service, body_req: Dict[str, str], assertion
@@ -40,6 +35,7 @@ class TestAddPetPost:
         pet_id = body_req["id"]
         cleanup_pet.append(pet_id)
 
+        assertion = getattr(pet_service, assertion)
         pet_service.add_pet_and_assert(body_req, assertion)
         pet_service.get_pet_and_assert(pet_id, body_req, assertion)
 
@@ -62,10 +58,10 @@ class TestAddPetPost:
         pet_id = body_req["id"]
         cleanup_pet.append(pet_id)
 
-        pet_service.add_pet_and_assert(body_req, assert_response_full)
+        pet_service.add_pet_and_assert(body_req, pet_service.assert_response_full)
 
         response = pet_service.get_pet_by_id(pet_id)
-        assert_response_code(response)
+        pet_service.assert_response_code(response)
 
         pet_data = response.json()
         assert pet_data["status"] == status
@@ -83,7 +79,7 @@ class TestAddPetPost:
         pet_id = body_req["id"]
 
         response = pet_service.add_pet(body_req)
-        assert_response_code(response, 405)
+        pet_service.assert_response_code(response, 405)
 
         response = pet_service.get_pet_by_id(pet_id)
-        assert_response_code(response, 404)
+        pet_service.assert_response_code(response, 404)

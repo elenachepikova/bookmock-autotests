@@ -1,2 +1,2 @@
-from .test_data import *
-from .customer_db import CustomerDB
+from .ui.test_data import *
+from .ui.customer_db import CustomerDB
