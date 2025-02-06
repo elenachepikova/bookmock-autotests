@@ -1,9 +1,9 @@
 import allure
 
-from core import BaseService, assert_response_code
+from core import APIAssertions
 
 
-class PetService(BaseService):
+class PetService(APIAssertions):
 
     def __init__(self, headers):
         super().__init__()
@@ -39,7 +39,7 @@ class PetService(BaseService):
     @allure.step("Add new pet and verify response code and body")
     def add_pet_and_assert(self, body_req, assertion):
         response = self.add_pet(body_req)
-        assert_response_code(response)
+        self.assert_response_code(response)
 
         pet_data = response.json()
         assertion(pet_data, body_req)
@@ -47,7 +47,18 @@ class PetService(BaseService):
     @allure.step("Add pet by ID and verify response code and body")
     def get_pet_and_assert(self, pet_id, body_req, assertion):
         response = self.get_pet_by_id(pet_id)
-        assert_response_code(response)
+        self.assert_response_code(response)
 
         pet_data = response.json()
         assertion(pet_data, body_req)
+
+    @allure.step(
+        "Assert response with minimal set of parameters provided in request body"
+    )
+    def assert_response_min(self, pet_data, body_req):
+        assert pet_data["id"] == body_req["id"], "Unexpected 'id' value"
+        assert pet_data["name"] == body_req["name"], "Unexpected 'name' value"
+        assert (
+            pet_data["photoUrls"] == body_req["photoUrls"]
+        ), "Unexpected 'photoUrls' value"
+        assert "tags" in pet_data.keys(), '"tags" key is missing in the response'

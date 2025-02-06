@@ -1,19 +1,14 @@
 import allure
 import pytest
 
-from core import (
-    assert_response_full,
-    assert_user_updated_response,
-    assert_response_code,
-    load_json_config,
-)
+from core import load_json_config
 
 
 @pytest.mark.api
 @allure.suite("Tests for user service")
 @allure.sub_suite("PUT")
 class TestUpdateUser:
-    body_config = load_json_config("config/request_bodies.json")
+    body_config = load_json_config("data/api/request_bodies.json")
     new_user_body = body_config["add_single_user"]
     updated_user_body = body_config["update_single_user"]
 
@@ -31,17 +26,17 @@ class TestUpdateUser:
         username = self.new_user_body[0]["username"]
 
         user_service.get_user_and_assert(
-            username, self.new_user_body, assert_response_full
+            username, self.new_user_body, user_service.assert_response_full
         )
         user_service.update_user_and_assert(
             username,
             self.updated_user_body,
-            lambda response: assert_user_updated_response(
+            lambda response: user_service.assert_user_updated_response(
                 response, self.updated_user_body
             ),
         )
         user_service.get_user_and_assert(
-            username, self.updated_user_body, assert_response_full
+            username, self.updated_user_body, user_service.assert_response_full
         )
 
     @allure.title(
@@ -54,7 +49,7 @@ class TestUpdateUser:
         Tests that attempt to update user by invalid username (not existing or empty) results in 404 error
         """
         response = user_service.update_user(self.updated_user_body, username)
-        assert_response_code(response, 404)
+        user_service.assert_response_code(response, 404)
 
     @allure.title(
         "Error 400 is displayed on attempt to update existing user with invalid user data (empty body)"
@@ -70,4 +65,4 @@ class TestUpdateUser:
         cleanup_user.append(username)
 
         response = user_service.update_user(body, username)
-        assert_response_code(response, 400)
+        user_service.assert_response_code(response, 400)

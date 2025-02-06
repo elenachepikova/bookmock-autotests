@@ -1,8 +1,6 @@
 import allure
 import pytest
 
-from core import assert_response_full, assert_response_code
-
 
 @pytest.mark.api
 @allure.suite("Tests for pet service")
@@ -21,7 +19,9 @@ class TestPetGet:
         pet_id = create_pet["id"]
         cleanup_pet.append(pet_id)
 
-        pet_service.get_pet_and_assert(pet_id, create_pet, assert_response_full)
+        pet_service.get_pet_and_assert(
+            pet_id, create_pet, pet_service.assert_response_full
+        )
 
     @allure.title(
         "Error 404 is displayed on attempt to retrieve pet using invalid pet id"
@@ -53,7 +53,7 @@ class TestPetGet:
         """
         response = pet_service.get_pet_by_id(pet_id)
 
-        assert_response_code(response, 404)
+        pet_service.assert_response_code(response, 404)
 
         pet_data = response.json()
         assert pet_data["message"] == message, 'Unexpected "message" key value'
@@ -69,4 +69,4 @@ class TestPetGet:
         """
         response = pet_service.get_pet_by_id("")
 
-        assert_response_code(response, 405)
+        pet_service.assert_response_code(response, 405)

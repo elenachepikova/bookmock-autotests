@@ -1,8 +1,6 @@
 import allure
 import pytest
 
-from core import assert_response_code
-
 
 @pytest.mark.api
 @allure.suite("Tests for store service")
@@ -22,7 +20,7 @@ class TestOrderDelete:
         order_id = place_order["id"]
 
         response = store_service.delete_order(order_id)
-        assert_response_code(response, 200)
+        store_service.assert_response_code(response, 200)
 
         order_data = response.json()
 
@@ -31,7 +29,7 @@ class TestOrderDelete:
         assert order_data["message"] == f"{order_id}", 'Unexpected "message" key value'
 
         response = store_service.get_order_by_id(order_id)
-        assert_response_code(response, 404)
+        store_service.assert_response_code(response, 404)
 
     @allure.title(
         "Error 404 is displayed on attempt to delete order by invalid order id"
@@ -62,7 +60,7 @@ class TestOrderDelete:
         (not existing, invalid type, special characters) results in 404 error
         """
         response = store_service.delete_order(order_id)
-        assert_response_code(response, code)
+        store_service.assert_response_code(response, code)
 
         order_data = response.json()
 
@@ -79,4 +77,4 @@ class TestOrderDelete:
         """
         response = store_service.delete_order("")
 
-        assert_response_code(response, 405)
+        store_service.assert_response_code(response, 405)

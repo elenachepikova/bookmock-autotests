@@ -1,19 +1,14 @@
 import allure
 import pytest
 
-from core import (
-    assert_user_list_created_response,
-    assert_response_full,
-    assert_response_code,
-    load_json_config,
-)
+from core import load_json_config
 
 
 @pytest.mark.api
 @allure.suite("Tests for user service")
 @allure.sub_suite("POST")
 class TestCreateUsersFromList:
-    body_config = load_json_config("config/request_bodies.json")
+    body_config = load_json_config("data/api/request_bodies.json")
     single_user = body_config["add_single_user"]
     multiple_users = body_config["add_list_of_users"]
     duplicates = body_config["duplicated_usernames"]
@@ -33,13 +28,13 @@ class TestCreateUsersFromList:
         """
         response = user_service.create_with_list(self.single_user)
         response_data = response.json()
-        assert_user_list_created_response(response_data)
+        user_service.assert_user_list_created_response(response_data)
 
         username = self.single_user[0]["username"]
         cleanup_user.append(username)
 
         user_service.get_user_and_assert(
-            username, self.single_user, assert_response_full
+            username, self.single_user, user_service.assert_response_full
         )
 
     @allure.title(
@@ -55,13 +50,15 @@ class TestCreateUsersFromList:
         """
         response = user_service.create_with_list(self.multiple_users)
         response_data = response.json()
-        assert_user_list_created_response(response_data)
+        user_service.assert_user_list_created_response(response_data)
 
         for user in self.multiple_users:
             username = user["username"]
             cleanup_user.append(username)
 
-            user_service.get_user_and_assert(username, user, assert_response_full)
+            user_service.get_user_and_assert(
+                username, user, user_service.assert_response_full
+            )
 
     @allure.title("New users cannot be created if request body contains duplicates")
     @pytest.mark.xfail(reason="existing bug: 200 OK instead of 400 err in response")
@@ -70,7 +67,7 @@ class TestCreateUsersFromList:
         Tests that attempt to create several users with the same username results in 400 error
         """
         response = user_service.create_with_list(self.duplicates)
-        assert_response_code(response, 400)
+        user_service.assert_response_code(response, 400)
 
     @allure.title("New users cannot be created if request body is empty")
     @pytest.mark.xfail(reason="existing bug: 200 OK instead of 400 err in response")
@@ -79,7 +76,7 @@ class TestCreateUsersFromList:
         Tests that attempt to create multiple users with empty list in request body results in 400 error
         """
         response = user_service.create_with_list(self.empty_list)
-        assert_response_code(response, 400)
+        user_service.assert_response_code(response, 400)
 
     @allure.title("New users cannot be created if request body is invalid")
     @pytest.mark.xfail(reason="existing bug: 200 OK instead of 400 err in response")
@@ -88,4 +85,4 @@ class TestCreateUsersFromList:
         Tests that attempt to create multiple users with invalid list in request body results in 400 error
         """
         response = user_service.create_with_list(self.incorrect_body)
-        assert_response_code(response, 400)
+        user_service.assert_response_code(response, 400)
