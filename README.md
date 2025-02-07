@@ -1,112 +1,129 @@
 # Autotests for [BookMock](https://elenachepikova.website3.me/) website
 
-## Description (TO UPDATE)
+## Overview
 
-This project contains a suite of automated tests designed to verify the functionality of
-the [BookMock](https://elenachepikova.website3.me/) website.
-Additionally, it includes a script for generating and storing random customer data in an SQLite database.
+This repository contains a comprehensive suite of automated tests for
+the [BookMock](https://elenachepikova.website3.me/) website. The test suite includes:
 
-## Technologies (TO REVIEW)
+- **API Tests**: To validate backend functionality
+- **Functional Tests**: To ensure key user workflows operate correctly
+- **UI Tests**: To verify frontend elements and interactions
+
+Additionally, the project utilizes an SQLite database (`customers.db`) for test data related to the checkout process.
+
+---
+
+## Technologies Used
 
 - **Python 3.12**
-- **Selenium**: For browser automation
+- **Selenium**: Web browser automation
 - **pytest**: Testing framework
-- **Allure**: For generating test reports
-- **SQLIte3**: For test data storage
+- **Allure Report**: Test reporting and visualization
+- **SQLite3**: Test data storage
+- **Flake8**: Code quality checks
 
-## Database
+---
 
-The project uses an SQLite database (`customers.db`) to store customer information. The database is automatically
-created in the project directory during the execution of the script, if it doesn't already exist.
+## Database Integration
 
-### Table structure:
+The project leverages an SQLite database (`customers.db`) to store customer details used in checkout-related tests. The
+database is pre-populated with **50 sample customer records**.
 
-- **ID**: Auto-incremented primary key
-- **FIRST_NAME**: First name of the customer
-- **LAST_NAME**: Last name of the customer
-- **EMAIL**: Unique email address of the customer
-- **MESSAGE**: Randomly generated message
+### Table Structure:
 
-### How to Run
+```
+id          INTEGER (Auto-increment)      # Unique identifier
+first_name  TEXT                          # Customer's first name
+last_name   TEXT                          # Customer's last name
+email       TEXT                          # Customer's email
+address     TEXT                          # Customer's address
+city        TEXT                          # City of residence
+country     TEXT                          # Country of residence
+state       TEXT                          # State/Region
+phone       TEXT                          # Customer's contact number
+```
 
-`customers.db` is automatically created, filled in and used by `customer_db` fixture in corresponding autotests (e.g.
-`test_submit_contact_us_form`) No additional actions required to set it up.
+The `customers.db` file is automatically accessed by the `customer_db` fixture in relevant tests (e.g.,
+`test_place_order`), requiring no manual setup.
 
-## Installation
+---
 
-### Steps
+## Installation Guide
+
+### Prerequisites:
+
+Ensure you have **Python 3.12** installed.
+
+### Setup Instructions:
 
 1. Clone the repository:
-    ``` bash
-        git clone https://github.com/elenachepikova/qap19onl_final_project.git
-        cd bookmock-autotests
-    ```   
-2. Create a virtual environment:
-    ``` bash
-        python -m venv venv
-        source venv/bin/activate  # For Linux/MacOS
-        venv\Scripts\activate  # For Windows
-   ```
-3. Install the dependencies:
-    ``` bash
-        pip install -r requirements.txt
-   ```
+    ```bash
+    git clone https://github.com/elenachepikova/qap19onl_final_project.git
+    cd bookmock-autotests
+    ```
+
+2. Create and activate a virtual environment:
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # Linux/macOS
+    venv\Scripts\activate  # Windows
+    ```
+
+3. Install required dependencies:
+    ```bash
+    pip install -r requirements.txt
+    ```
 
 ## Running Tests
 
-### Execute All Tests
+### Run All Tests
 
-``` bash
-    python -m pytest
-   ```
+```bash
+python -m pytest
+```
 
-### Generate Allure Report
+### Run Tests by Category
 
-1. Run Tests with Allure Results:
-    ``` bash
+```bash
+python -m pytest -m api         # API Tests
+python -m pytest -m functional  # Functional Tests
+python -m pytest -m ui          # UI Tests
+python -m pytest -m smoke       # Smoke Tests
+python -m pytest -m regression  # Regression Tests
+```
+
+### Generating Allure Reports
+
+1. Run tests and generate test results:
+    ```bash
     python -m pytest --alluredir allure-results
     ```
-2. Generate Allure Report:
-    ``` bash
+2. Generate and serve the report:
+    ```bash
     allure serve allure-results
     ```
 
-## Project Structure (TO UPDATE)
+---
+
+## Project Structure
 
 ``` vbnet
+├── .github/                        # GitHub workflows (Flake8 > API tests on pull request & push to main)
 ├── core/                           # Directory containing base methods
-│   ├── __init__.py                 # Initialization file for the core module
-│   ├── actions.py                  # Base page with common methods
-│   ├── assertions.py               # Common assertions for test validations
 ├── data/                           # Directory containing data to be used in tests
-│   ├── __init__.py                 # Initialization file for the data module
-│   ├── customer_db.py              # Customer DataBase Class (DB generation, fullfillment and usage)
-│   └── test_data.py                # Store test data 
 ├── elements/                       # Directory containing modules related to the locators and interactions with page elements
-│   ├── __init__.py                 # Initialization file for the elements module
-│   ├── cart.py                     # Element locators and interactions for the shopping cart
-│   ├── footer.py                   # Element locators and interactions for the page footer
-│   └── header.py                   # Element locators and interactions for the page header (Navigation Panel)
 ├── pages/                          # Page Object Model (POM) classes
-│   ├── __init__.py                 # Initialization file for the pages module
-│   ├── about_page.py               # Page object for the About page
-│   ├── contact_page.py             # Page object for the Contact page
-│   ├── faq_page.py                 # Page object for the FAQ page
-│   ├── form_submitted_page.py      # Page object for the form submission success page
-│   ├── home_page.py                # Page object for the Home page
-│   └── shop_page.py                # Page object for the Shop page
-├── tests/                          # Directory containing all test cases
-│   ├── test_about.py               # Tests for the about page
-│   ├── test_cart.py                # Tests for the cart feature
-│   ├── test_contact.py             # Tests for the contact page
-│   ├── test_homepage.py            # Tests for the homepage
-│   ├── test_navigation_panel.py    # Tests for the navigation panel feature
-│   └── test_shop.py                # Tests for the shop feature
+├── services/                       # Services and API interaction layers
+├── tests/                          # Directory containing api, functional, and ui tests
 ├── .gitignore                      # Git ignore file
-├── conftest.py                     # pytest configurations and fixtures
+├── customers.db                    # SQLite test database
+├── pytest.ini                      # Pytest configuration
 ├── README.md                       # Project documentation
-└──  requirements.txt               # Python dependencies
+├── requirements.txt                # Python dependencies
+└── setup.cfg                       # Configuration file
 ```
+
+---
 
 ## Author
 
