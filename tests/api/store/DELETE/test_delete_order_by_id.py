@@ -6,6 +6,7 @@ import pytest
 @allure.suite("Tests for store service")
 @allure.sub_suite("DELETE")
 class TestOrderDelete:
+    @pytest.mark.smoke
     @allure.title(
         "Existing order can be successfully deleted using DELETE /store/order/{order_id} endpoint"
     )
@@ -31,6 +32,7 @@ class TestOrderDelete:
         response = store_service.get_order_by_id(order_id)
         store_service.assert_response_code(response, 404)
 
+    @pytest.mark.regression
     @allure.title(
         "Error 404 is displayed on attempt to delete order by invalid order id"
     )
@@ -68,6 +70,7 @@ class TestOrderDelete:
         assert order_data["type"] == key_type, 'Unexpected "type" key value'
         assert order_data["message"] == message, 'Unexpected "message" key value'
 
+    @pytest.mark.regression
     @allure.title(
         "Error 405 is displayed on attempt to delete order using empty order id"
     )

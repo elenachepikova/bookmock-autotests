@@ -9,6 +9,7 @@ from pages import HomePage, ShopPage, ProductPage, CheckoutPage
 @allure.suite("Checkout steps")
 class TestCheckout:
 
+    @pytest.mark.smoke
     @allure.title("Go through checkout process")
     def test_place_order(self, driver, customer_db):
         homepage = HomePage(driver)

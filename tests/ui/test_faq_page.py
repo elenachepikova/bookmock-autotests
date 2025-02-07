@@ -9,6 +9,7 @@ from pages import FAQPage
 @allure.suite("'FAQ' page")
 class TestFAQPage:
 
+    @pytest.mark.smoke
     @allure.title("All expected elements are present on 'FAQ' page")
     def test_assert_faq_page_ui(self, driver):
         faq_page = FAQPage(driver)

@@ -9,6 +9,7 @@ from pages import ContactPage
 @allure.suite("'CONTACT' page")
 class TestContactPage:
 
+    @pytest.mark.smoke
     @allure.title("All expected elements are present on 'CONTACT' page")
     def test_assert_contact_page_ui(self, driver):
         contact_page = ContactPage(driver)

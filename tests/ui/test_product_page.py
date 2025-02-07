@@ -15,6 +15,7 @@ class TestProductPage:
     harry_potter = products["Harry Potter"]["title"]
     happiness = products["Happiness"]["title"]
 
+    @pytest.mark.smoke
     @allure.title("Open Product page from 'Featured' section on HOME page")
     def test_open_product_page_from_home(self, driver):
         homepage = HomePage(driver)
@@ -27,6 +28,7 @@ class TestProductPage:
         product_page = ProductPage(driver)
         product_page.assert_page_is_displayed(self.harry_potter, self.path_hp)
 
+    @pytest.mark.regression
     @allure.title("Open Product page from 'All Products' section on SHOP page")
     def test_open_product_page_from_shop(self, driver):
         shop_page = ShopPage(driver)
@@ -40,6 +42,7 @@ class TestProductPage:
         footer = Footer(driver)
         footer.assert_footer_is_displayed()
 
+    @pytest.mark.smoke
     @allure.title("Assert page UI for regular Product")
     def test_regular_product_page(self, driver):
         product_page = ProductPage(driver)
@@ -48,6 +51,7 @@ class TestProductPage:
         product_page.assert_original_price_absence()
         product_page.assert_cover_selector_absence()
 
+    @pytest.mark.regression
     @allure.title("Assert page UI for Product on sale")
     def test_product_on_sale_page(self, driver):
         product_page = ProductPage(driver)
@@ -56,6 +60,7 @@ class TestProductPage:
         product_page.assert_original_price_presence()
         product_page.assert_cover_selector_absence()
 
+    @pytest.mark.regression
     @allure.title("Assert page UI for Product with Cover options")
     def test_product_with_cover_options_page(self, driver):
         product_page = ProductPage(driver)

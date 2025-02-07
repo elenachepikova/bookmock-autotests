@@ -13,6 +13,7 @@ class TestShopPage:
     twilight = products["Twilight"]["title"]
     happiness = products["Happiness"]["title"]
 
+    @pytest.mark.smoke
     @allure.title("Assert all expected elements are present on 'SHOP' page")
     def test_assert_shop_page_ui(self, driver):
         shop_page = ShopPage(driver)
@@ -24,6 +25,7 @@ class TestShopPage:
         footer = Footer(driver)
         footer.assert_footer_is_displayed()
 
+    @pytest.mark.regression
     @pytest.mark.parametrize(
         "value, title", [("har", harry_potter), ("twi", twilight), ("sci", happiness)]
     )
@@ -35,6 +37,7 @@ class TestShopPage:
         shop_page.assert_products_count(1)
         shop_page.assert_first_book_title(title)
 
+    @pytest.mark.regression
     @allure.title("Clear search by product name on 'SHOP' page")
     def test_clear_search_filter(self, driver):
         shop_page = ShopPage(driver)
@@ -45,6 +48,7 @@ class TestShopPage:
         shop_page.clear_search_filter()
         shop_page.assert_products_count(3)
 
+    @pytest.mark.regression
     @pytest.mark.parametrize(
         "check_checkbox, value, title",
         [
@@ -53,6 +57,7 @@ class TestShopPage:
             (lambda shop_page: shop_page.check_in_stock_checkbox(), 3, twilight),
         ],
     )
+    @pytest.mark.regression
     @allure.title("Filter ALL products by 'Browse By' filter")
     def test_filter_by_browse_by(self, driver, check_checkbox, value, title):
         shop_page = ShopPage(driver)
@@ -62,6 +67,7 @@ class TestShopPage:
         shop_page.assert_products_count(value)
         shop_page.assert_first_book_title(title)
 
+    @pytest.mark.regression
     @pytest.mark.parametrize(
         "check_checkbox, value, title",
         [
@@ -70,6 +76,7 @@ class TestShopPage:
             (lambda shop_page: shop_page.check_popular_checkbox(), 1, harry_potter),
         ],
     )
+    @pytest.mark.regression
     @allure.title("Filter ALL products by 'Collections' filter")
     def test_filter_by_collections(self, driver, check_checkbox, value, title):
         shop_page = ShopPage(driver)
@@ -79,10 +86,12 @@ class TestShopPage:
         shop_page.assert_products_count(value)
         shop_page.assert_first_book_title(title)
 
+    @pytest.mark.regression
     @pytest.mark.parametrize(
         "price_min, price_max, title",
         [(8, 10, happiness), (10, 20, harry_potter), (20, 100, twilight)],
     )
+    @pytest.mark.regression
     @allure.title("Filter ALL products by Price")
     def test_filter_by_price(self, driver, price_min, price_max, title):
         shop_page = ShopPage(driver)
@@ -93,6 +102,7 @@ class TestShopPage:
         shop_page.assert_products_count(1)
         shop_page.assert_first_book_title(title)
 
+    @pytest.mark.regression
     @allure.title("No products found message if search is unsuccessful")
     def test_no_matches_found(self, driver):
         shop_page = ShopPage(driver)
@@ -102,6 +112,7 @@ class TestShopPage:
         shop_page.check_non_fiction_checkbox()
         shop_page.assert_no_results_found_message()
 
+    @pytest.mark.regression
     @pytest.mark.parametrize(
         "dropdown_option, title",
         [
@@ -112,6 +123,7 @@ class TestShopPage:
             (lambda dropdown: dropdown.sort_by_name_z_a(), twilight),
         ],
     )
+    @pytest.mark.regression
     @allure.title("Sort Featured section items with 'Sort By' drop-down")
     def test_sort_all_products(self, driver, dropdown_option, title):
         shop_page = ShopPage(driver)

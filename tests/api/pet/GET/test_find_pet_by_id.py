@@ -6,6 +6,7 @@ import pytest
 @allure.suite("Tests for pet service")
 @allure.sub_suite("GET")
 class TestPetGet:
+    @pytest.mark.smoke
     @allure.title(
         "Existing pet data can be successfully retrieved using GET /pet/{pet_id} endpoint"
     )
@@ -23,6 +24,7 @@ class TestPetGet:
             pet_id, create_pet, pet_service.assert_response_full
         )
 
+    @pytest.mark.regression
     @allure.title(
         "Error 404 is displayed on attempt to retrieve pet using invalid pet id"
     )
@@ -60,6 +62,7 @@ class TestPetGet:
         assert pet_data["code"] == code, 'Unexpected "code" key value'
         assert pet_data["type"] == key_type, 'Unexpected "type" key value'
 
+    @pytest.mark.regression
     @allure.title(
         "Error 405 is displayed on attempt to retrieve pet using empty pet id"
     )

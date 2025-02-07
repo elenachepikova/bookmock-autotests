@@ -5,6 +5,7 @@ from core import load_json_config
 
 
 @pytest.mark.api
+@pytest.mark.regression
 @allure.suite("Tests for user service")
 @allure.sub_suite("PUT")
 class TestUpdateUser:

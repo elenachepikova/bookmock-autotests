@@ -16,6 +16,7 @@ class TestAddPetPost:
     pending = body_config["add_pending_pet_with_all_parameters"]
     sold = body_config["add_sold_pet_with_all_parameters"]
 
+    @pytest.mark.smoke
     @allure.title("New pet can be successfully added using POST /pet endpoint")
     @pytest.mark.parametrize(
         "body_req, assertion",
@@ -39,6 +40,7 @@ class TestAddPetPost:
         pet_service.add_pet_and_assert(body_req, assertion)
         pet_service.get_pet_and_assert(pet_id, body_req, assertion)
 
+    @pytest.mark.regression
     @allure.title(
         "New pet with different parameters can be successfully added using POST /pet endpoint"
     )
@@ -66,6 +68,7 @@ class TestAddPetPost:
         pet_data = response.json()
         assert pet_data["status"] == status
 
+    @pytest.mark.regression
     @allure.title("New pet cannot be added if body does not correspond to schema")
     @pytest.mark.xfail(reason="existing bug: 500 err instead of 405 in response")
     def test_add_pet_with_invalid_params(self, pet_service):

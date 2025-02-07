@@ -13,6 +13,7 @@ class TestCart:
     harry_potter = products["Harry Potter"]
     happiness = products["Happiness"]
 
+    @pytest.mark.smoke
     @allure.title("CART sidebar can be opened via 'HOME' page")
     def test_open_empty_cart(self, driver):
         homepage = HomePage(driver)
@@ -24,6 +25,7 @@ class TestCart:
         cart.click_on_close_icon()
         cart.assert_cart_is_not_displayed()
 
+    @pytest.mark.smoke
     @allure.title("Add regular product to cart from HOME page")
     def test_add_product_to_cart(self, driver):
         homepage = HomePage(driver)
@@ -44,6 +46,7 @@ class TestCart:
         cart.assert_product_price(self.twilight["price"])
         cart.assert_cart_total()
 
+    @pytest.mark.regression
     @allure.title("Add product with cover options to cart from SHOP page")
     def test_add_product_with_options_to_cart(self, driver):
         shop_page = ShopPage(driver)
@@ -62,6 +65,7 @@ class TestCart:
         cart.assert_product_price(self.harry_potter["price"])
         cart.assert_cart_total()
 
+    @pytest.mark.regression
     @allure.title("Add regular product to cart from Product page")
     def test_add_several_products_to_cart(self, driver):
         shop_page = ShopPage(driver)
@@ -78,6 +82,7 @@ class TestCart:
         cart.assert_product_price(self.happiness["price"])
         cart.assert_cart_total()
 
+    @pytest.mark.smoke
     @allure.title("Remove added product from cart")
     def test_remove_product_from_cart(self, driver):
         shop_page = ShopPage(driver)
@@ -91,6 +96,7 @@ class TestCart:
         cart.set_quantity("0")
         cart.assert_empty_cart_is_displayed()
 
+    @pytest.mark.regression
     @allure.title("Update product quantity in cart")
     def test_update_product_quantity_in_cart(self, driver):
         shop_page = ShopPage(driver)
@@ -108,6 +114,7 @@ class TestCart:
         header.click_on_cart_icon()
         cart.assert_cart_total()
 
+    @pytest.mark.regression
     @allure.title("Click on 'Continue Shopping' button in Cart")
     def test_click_continue_shopping_button(self, driver):
         shop_page = ShopPage(driver)
@@ -124,6 +131,7 @@ class TestCart:
         cart.assert_cart_is_not_displayed()
         shop_page.assert_page_is_displayed()
 
+    @pytest.mark.regression
     @allure.title("Add different products to cart")
     def test_add_different_products_to_cart(self, driver):
         shop_page = ShopPage(driver)

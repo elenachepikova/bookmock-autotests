@@ -15,6 +15,7 @@ class TestCreateUsersFromList:
     empty_list = body_config["empty_list"]
     incorrect_body = body_config["incorrect_body"]
 
+    @pytest.mark.regression
     @allure.title(
         "New user can be successfully created using POST /user/createWithList endpoint"
     )
@@ -37,6 +38,7 @@ class TestCreateUsersFromList:
             username, self.single_user, user_service.assert_response_full
         )
 
+    @pytest.mark.smoke
     @allure.title(
         "New users can be successfully created using POST /user/createWithList endpoint"
     )
@@ -60,6 +62,7 @@ class TestCreateUsersFromList:
                 username, user, user_service.assert_response_full
             )
 
+    @pytest.mark.regression
     @allure.title("New users cannot be created if request body contains duplicates")
     @pytest.mark.xfail(reason="existing bug: 200 OK instead of 400 err in response")
     def test_error_add_duplicates(self, cleanup_user, user_service):
@@ -69,6 +72,7 @@ class TestCreateUsersFromList:
         response = user_service.create_with_list(self.duplicates)
         user_service.assert_response_code(response, 400)
 
+    @pytest.mark.regression
     @allure.title("New users cannot be created if request body is empty")
     @pytest.mark.xfail(reason="existing bug: 200 OK instead of 400 err in response")
     def test_error_add_empty_list(self, cleanup_user, user_service):
@@ -78,6 +82,7 @@ class TestCreateUsersFromList:
         response = user_service.create_with_list(self.empty_list)
         user_service.assert_response_code(response, 400)
 
+    @pytest.mark.regression
     @allure.title("New users cannot be created if request body is invalid")
     @pytest.mark.xfail(reason="existing bug: 200 OK instead of 400 err in response")
     def test_error_add_incorrect_body(self, cleanup_user, user_service):
