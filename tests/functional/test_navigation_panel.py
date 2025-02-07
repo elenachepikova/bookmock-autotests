@@ -9,6 +9,7 @@ from pages import AboutPage, ContactPage, HomePage, ShopPage, FAQPage
 @allure.suite("Navigation panel")
 class TestNavigationPanel:
 
+    @pytest.mark.smoke
     @allure.title("Open 'ABOUT' page via navigation panel")
     def test_open_about_page_via_nav_panel(self, driver):
         homepage = HomePage(driver)
@@ -18,6 +19,7 @@ class TestNavigationPanel:
         about_page = AboutPage(driver)
         about_page.assert_page_is_displayed()
 
+    @pytest.mark.smoke
     @allure.title("Open 'SHOP' page via navigation panel")
     def test_open_shop_page_via_nav_panel(self, driver):
         homepage = HomePage(driver)
@@ -27,6 +29,7 @@ class TestNavigationPanel:
         shop_page = ShopPage(driver)
         shop_page.assert_page_is_displayed()
 
+    @pytest.mark.smoke
     @allure.title("Open 'FAQ' page via navigation panel")
     def test_open_faq_page_via_nav_panel(self, driver):
         homepage = HomePage(driver)
@@ -36,6 +39,7 @@ class TestNavigationPanel:
         faq_page = FAQPage(driver)
         faq_page.assert_page_is_displayed()
 
+    @pytest.mark.smoke
     @allure.title("Open 'CONTACT' page via navigation panel")
     def test_open_contact_page_via_nav_panel(self, driver):
         homepage = HomePage(driver)
@@ -45,6 +49,7 @@ class TestNavigationPanel:
         contact_page = ContactPage(driver)
         contact_page.assert_page_is_displayed()
 
+    @pytest.mark.smoke
     @allure.title("Open 'HOME' page via navigation panel")
     def test_open_home_page_via_nav_panel(self, driver):
         contact_page = ContactPage(driver)
@@ -54,6 +59,7 @@ class TestNavigationPanel:
         homepage = HomePage(driver)
         homepage.assert_page_is_displayed()
 
+    @pytest.mark.regression
     @allure.title("Click on site logo redirects to 'HOME' page")
     def test_click_on_logo_in_nav_panel(self, driver):
         faq_page = FAQPage(driver)
@@ -63,6 +69,7 @@ class TestNavigationPanel:
         homepage = HomePage(driver)
         homepage.assert_page_is_displayed()
 
+    @pytest.mark.regression
     @allure.title("'SHOP NOW' button redirects to 'SHOP' page")
     def test_click_on_show_now_button_in_nav_panel(self, driver):
         homepage = HomePage(driver)
@@ -72,6 +79,7 @@ class TestNavigationPanel:
         shop_page = ShopPage(driver)
         shop_page.assert_page_is_displayed()
 
+    @pytest.mark.regression
     @allure.title("'CART' icon opens Cart sidebar")
     def test_open_empty_cart(self, driver):
         homepage = HomePage(driver)

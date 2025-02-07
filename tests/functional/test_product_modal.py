@@ -13,6 +13,7 @@ class TestProductModal:
     twilight = products["Twilight"]["title"]
     happiness = products["Happiness"]["title"]
 
+    @pytest.mark.smoke
     @allure.title("Open regular Product modal from 'Featured' section on HOME page")
     def test_open_regular_product_modal_from_home_page(self, driver):
         homepage = HomePage(driver)
@@ -31,6 +32,7 @@ class TestProductModal:
         homepage.assert_products_count(1)
         homepage.assert_first_book_title(self.twilight)
 
+    @pytest.mark.regression
     @allure.title(
         "Open Product modal for discounted product from 'All Products' section on SHOP page"
     )
@@ -48,6 +50,7 @@ class TestProductModal:
         shop_page.assert_products_count(1)
         shop_page.assert_first_book_title(self.happiness)
 
+    @pytest.mark.regression
     @allure.title(
         "Open Product modal for product with cover options from 'All Products' section on SHOP page"
     )

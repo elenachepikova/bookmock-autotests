@@ -12,12 +12,14 @@ class TestHomePage:
     harry_potter = products["Harry Potter"]["title"]
     twilight = products["Twilight"]["title"]
 
+    @pytest.mark.smoke
     @allure.title("'HOME' page is accessible")
     def test_open_homepage(self, driver):
         homepage = HomePage(driver)
         homepage.open()
         homepage.assert_page_is_displayed()
 
+    @pytest.mark.smoke
     @allure.title("All expected elements are present on 'HOME' page")
     def test_assert_homepage_ui(self, driver):
         homepage = HomePage(driver)
@@ -28,6 +30,7 @@ class TestHomePage:
         footer = Footer(driver)
         footer.assert_footer_is_displayed()
 
+    @pytest.mark.regression
     @allure.title("'SHOP' link in Featured section redirects user to SHOP page")
     def test_click_shop_link(self, driver):
         homepage = HomePage(driver)
@@ -36,6 +39,7 @@ class TestHomePage:
         shop_page = ShopPage(driver)
         shop_page.assert_page_is_displayed()
 
+    @pytest.mark.regression
     @pytest.mark.parametrize(
         "dropdown_option, title",
         [
