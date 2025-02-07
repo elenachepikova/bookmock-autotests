@@ -1,6 +1,5 @@
 DOMAIN = "https://elenachepikova.website3.me"
 TITLE = "elenachepikova.website3.me"
-TEST_EMAIL = "ec.estest01@gmail.com"
 NOT_FOUND_MESSAGE = (
     "No products matched your search criteria. Try widening your search."
 )
