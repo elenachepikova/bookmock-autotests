@@ -74,12 +74,16 @@ Ensure you have **Python 3.12** installed.
     pip install -r requirements.txt
     ```
 
+---
+
 ## Running Tests
 
 ### Run All Tests
 
 ```bash
 python -m pytest
+
+HEADLESS=true python -m pytest # run in headless mode
 ```
 
 ### Run Tests by Category
@@ -105,6 +109,33 @@ python -m pytest -m regression  # Regression Tests
 
 ---
 
+## Docker Integration
+
+To make it easier to run tests in isolated environments, the project includes a docker-compose.yml file and a
+Dockerfile. These configurations allow you to run different sets of tests (API, functional, UI) within Docker
+containers.
+
+### Run tests with `docker-compose.yml`:
+
+```bash
+docker-compose build            # create docker images for each service (api, functional, ui based on Dockerfile)
+docker-compose up               # execute all tests in parallel
+docker-compose run api          # execute api suite
+docker-compose run functional   # execute functional suite
+docker-compose run ui           # execute ui suite
+docker-compose down             # stop and delete containers
+```
+
+### Run tests with `Dockerfile`:
+
+```bash
+docker build -t <image name> .      # create docker image
+docker run --rm <image name>        # run container with docker image and delete container after run
+```
+Note that Docker tests are running in headless mode. 
+
+---
+
 ## Project Structure
 
 ``` vbnet
@@ -117,6 +148,8 @@ python -m pytest -m regression  # Regression Tests
 ├── tests/                          # Directory containing api, functional, and ui tests
 ├── .gitignore                      # Git ignore file
 ├── customers.db                    # SQLite test database
+├── docker-compose.yml              # Defines Docker services for API, functional, and UI tests
+├── Dockerfile                      # Defines how to build the Docker container for running tests
 ├── pytest.ini                      # Pytest configuration
 ├── README.md                       # Project documentation
 ├── requirements.txt                # Python dependencies
