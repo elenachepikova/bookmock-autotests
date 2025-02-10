@@ -57,7 +57,6 @@ class TestShopPage:
             (lambda shop_page: shop_page.check_in_stock_checkbox(), 3, twilight),
         ],
     )
-    @pytest.mark.regression
     @allure.title("Filter ALL products by 'Browse By' filter")
     def test_filter_by_browse_by(self, driver, check_checkbox, value, title):
         shop_page = ShopPage(driver)
@@ -76,7 +75,6 @@ class TestShopPage:
             (lambda shop_page: shop_page.check_popular_checkbox(), 1, harry_potter),
         ],
     )
-    @pytest.mark.regression
     @allure.title("Filter ALL products by 'Collections' filter")
     def test_filter_by_collections(self, driver, check_checkbox, value, title):
         shop_page = ShopPage(driver)
@@ -91,7 +89,6 @@ class TestShopPage:
         "price_min, price_max, title",
         [(8, 10, happiness), (10, 20, harry_potter), (20, 100, twilight)],
     )
-    @pytest.mark.regression
     @allure.title("Filter ALL products by Price")
     def test_filter_by_price(self, driver, price_min, price_max, title):
         shop_page = ShopPage(driver)
@@ -123,7 +120,6 @@ class TestShopPage:
             (lambda dropdown: dropdown.sort_by_name_z_a(), twilight),
         ],
     )
-    @pytest.mark.regression
     @allure.title("Sort Featured section items with 'Sort By' drop-down")
     def test_sort_all_products(self, driver, dropdown_option, title):
         shop_page = ShopPage(driver)
